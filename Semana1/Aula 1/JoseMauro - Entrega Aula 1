@@ -1,0 +1,214 @@
+Comandos:
+
+cd Documentos/Future4/Semana1/aula1/assassinato-na-linha-de-comando/
+    3  ls
+    4  cd misterio
+    5  ls
+    6  cat cena-do-crime 
+    7  grep "PISTA" cena-do-crime 
+    8  ls
+    9  cd associ
+   10  cd associacoes/
+   11  ls
+   12  cd AAA
+   13  cat AAA
+   14  grep "Annabel" AAA
+   15  ls
+   16  cat Delta_SkyMiles 
+   17  grep "Annabel" Delta_SkyMiles 
+   18  ls
+   19  grep Biblioteca_da_Cidade 
+   20  cat Biblioteca_da_Cidade 
+   21  grep "Annabel" Biblioteca_da_Cidade 
+   22  ls
+   23  cat Museu_da_HistÃ³ria_do_Bash 
+   24  grep "Annabel" Museu_da_HistÃ³ria_do_Bash 
+   25  ls
+   26  cd ..
+   27  ls
+   28  cat pessoas 
+   29  grep "Annabel" pessoas
+   30  ls
+   31  cd ruas/
+   32  ls
+   33  cat Vila_Hart
+   34  head -n 40 Vila_Hart 
+   35  ls
+   36  head -n 173 Rua_Mattapan 
+   37  head -n 179 Vila_Buckingham 
+   38  head -n 176 Rua_Haley 
+   39  ls
+   40  cd ..
+   41  ls
+   42  cd entrevistas/
+   43  ls
+   44  cat entrevista-47246024 
+   45  cat entrevista-9437737
+   46  cat entrevista-699607
+   47  cat entrevista-871877
+   48  cd ..
+   49  ls
+   50  grep "L337" automoveis 
+   51  ls
+   52  cat automoveis 
+   53  grep -A 5 "L337"
+   54  grep -A 5 "L337" automoveis 
+   55  ls
+   56  grep "Erika" pessoas
+   57  grep "Aron" pessoas
+   58  grep "Heather" pessoas
+   59  grep "Joe" pessoas
+   60  grep "Jeremy" pessoas
+   61  grep "Jacqui" pessoas
+   62  ls
+   63  cd ruas/
+   64  head -n 98 "Rua_Trapelo" 
+   65  head -n 145 "Rua_Claybourne" 
+   66  head -19 "Rua_Culbert" 
+   67  head -n 275 "Rua_Plainfield" 
+   68  head -n 284 "Travessa_Dunstable" 
+   69  head -n 224 "Travessa_Andover" 
+   70  ls
+   71  cd ..
+   72  ls
+   73  cd entrev
+   74  cd entrevistas/
+   75  ls
+   76  cat entrevista-5455315
+   77  cat entrevista-1767435
+   78  cat entrevista-2939888
+   79  cat entrevista-29741223
+   80  cat entrevista-9620713
+   81  cat entrevista-904020
+   82  cd ..
+   83  ls
+   84  cd associacoes/
+   85  grep "Jeremy Bowers" AAA
+   86  grep "Jeremy Bowers" Delta_SkyMiles 
+   87  grep "Jeremy Bowers" Biblioteca_da_Cidade 
+   88  grep "Jeremy Bowers" Museu_da_HistÃ³ria_do_Bash 
+   89  history
+
+
+
+
+Anotações:
+
+homem alto, 1,83
+
+aaa, delta skymiles, biblioteca, museu da historia do bash
+
+mulher annabel loira nova zelandia
+
+AAA - Annabel Church
+
+Delta Skymiles - nada com Annabel
+
+Biblioteca - nada com Annabel
+
+museu da historia do bash - Annabel Church / Oluwasegun Annabel
+
+
+pessoas: 
+Annabel Sun	F	26	Vila Hart, linha 40
+Oluwasegun Annabel	M	37	Rua Mattapan, linha 173
+Annabel Church	F	38	Vila Buckingham, linha 179
+Annabel Fuglsang	M	40	Rua Haley, linha 176
+
+
+Vila hart - ler entrevista 47246024
+
+Rua Mattapan - ler entrevista 9437737
+
+Vila Buckingham - ler entrevista 699607
+
+Rua Haley - ler entrevista 871877
+
+A Srta. Sun tem cabelo castanho e não é da Nova Zelândia. Não é a testemunha da cafeteria.
+
+Oluwasegun - não parece ser a testemunha da cafeteria, já que a testemunha é mulher
+
+
+Entrevistamos a Srta. Church às 14:04. A testemunha afirmou que não viu ninguém com as características do atirador e que saiu correndo assim que os tiros foram disparados.
+No entanto, ela reportou que viu um carro fugindo da cena do crime. Descreveu como um Honda azul, com placa que começa com "L337" e termina com "9".
+
+
+
+
+Fuglsang tem cabelo preto, não é a testemunha da cafeteria
+
+
+
+Placa L337QE9
+Marca: Honda
+Cor: Azul
+Proprietário: Erika Owens
+Altura: 1,96 m
+Peso: 99,8 kg
+Erika Owens	F	56	Rua Trapelo, linha 98
+ler entrevista 5455315
+Owens has an alibi for the morning in question, she was in Toronto for the Mozilla All Hands Meeting.  Multiple sources, including a person in a fox costume, corroborate this.  Not a suspect.
+
+
+Placa L337539
+Marca: Honda
+Cor: Azul
+Proprietário: Aron Pilhofer
+Altura: 1,6 m
+Peso: 89,8 kg
+Aron Pilhofer	M	16	Rua Claybourne, linha 145
+ler entrevista 1767435
+Too short to match the camera footage.  Pilhofer is not considered a suspect.
+
+Placa L337369
+Marca: Honda
+Cor: Azul
+Proprietário: Heather Billings
+Altura: 1,58 m
+Peso: 110,7 kg
+Heather Billings	F	38	Rua Culbert, linha 19
+ler 2939888
+Billings should not be considered a suspect, she is too short to match the camera footage and the killer is believed to be male.
+
+
+Placa L337DV9
+Marca: Honda
+Cor: Azul
+Proprietário: Joe Germuska
+Altura: 1,88 m
+Peso: 74,4 kg
+Joe Germuska	M	65	Rua Plainfield, linha 275
+ler 29741223
+Não deve ser considerado suspeito, pois não é associado ao SkyMiles e nunca foi membro do Museu de História do Bash.
+
+
+
+Placa L3375A9
+Marca: Honda
+Cor: Azul
+Proprietário: Jeremy Bowers
+Altura: 1,86 m
+Peso: 92,5 kg
+Jeremy Bowers	M	34	Travessa Dunstable, linha 284
+ler 9620713
+A casa parece estar vazia. Não houve resposta quando batemos na porta.
+
+Após questionar os vizinhos, parece que o morador viajou recentemente.
+
+Será considerado um suspeito até que se prove o contrário, mas teríamos que eliminar outros suspeitos para ter certeza.
+
+
+
+Placa L337WR9
+Marca: Honda
+Cor: Azul
+Proprietário: Jacqui Maher
+Altura: 1,88 m
+Peso: 59,0 kg
+Jacqui Maher	F	40	Travessa Andover, linha 224
+ler 904020
+Maher is not considered a suspect.  Video evidence confirms that she was away at a professional soccer game on the morning in question, even though it was a workday.
+
+
+
+Das pessoas com carro Honda Azul de placa L337 final 9, o único suspeito é Jeremy Bowers, que ao verificar nas associações, consta registro de acordo com as carteirinhas. Logo, ele é culpado.
