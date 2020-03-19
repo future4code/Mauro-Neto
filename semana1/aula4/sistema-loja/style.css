@@ -1,0 +1,68 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#menu{
+    background-color: black;
+    padding: 10px;
+    
+}
+
+#menu li{
+    display: inline;
+    padding: 5px;
+}
+
+a{
+    color: white;
+    text-decoration:none;
+    padding: 5px;
+}
+
+a:hover {
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    transition: background-color 0.5s , color 0.5s;
+    transition-timing-function: linear;
+}
+
+#content{
+    padding: 20px;
+}
+
+#footer{
+    background-color: gray;
+    padding: 10px
+}
+
+
+#estoque{
+    padding: 0 100px;
+}
+
+#estoque img{
+    width: 250px;
+}
+
+td{
+    align-items: center;
+    text-align: center;
+    padding: 20px 50px;
+}
+
+#adicionar{
+    padding: 0 20px;
+}
+
+#adicionar label{
+    padding: 20px 0;
+}
+#adicionar input{
+    width: 30%;
+}
+
+#funcionarios{
+    padding: 20px 0;
+    list-style-type: none;
+}
