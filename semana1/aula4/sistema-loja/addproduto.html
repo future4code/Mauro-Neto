@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="estoque.html">Estoque</a></li>
+            <li><a href="addproduto.html">Adicionar produto</a></li>
+            <li><a href="funcionarios.html">Funcionários</a></li>
+        </ul>
+    </div>
+    <div id="content">
+            <h3 style="padding: 10px 20px">Cadastro de produtos</h3>
+        <form id="adicionar">
+            <label for="imagem">Selecione a imagem do produto</label><br />
+            <input type="file" id="imagem" name="imagem" accept="image/*"/><br />
+            <label for="produto">Nome do produto: </label><br />
+            <input type="text" id="produto" name="produto" /><br />
+            <label for="especificacoes">Especificações: </label><br />
+            <input type="text" id="especificacoes" name="especificacoes" /><br />
+            <label for="cor">Cor:</label><br />
+            <input type="text" id="cor" name="cor" /><br />
+            <label for="quantidade">Quantidade: </label><br />
+            <input type="text" id="quantidade" name="quantidade" /><br />
+            <label for="valor">Valor: </label><br />
+            <input type="text" id="valor" name="valor" /><br />
+            <br />
+            <input type="submit" value="Adicionar produto" />
+        </form>
+    </div>
+    <div id="footer">
+        <p align="center">Copyright</p>
+    </div>
+</body>
+</html>
