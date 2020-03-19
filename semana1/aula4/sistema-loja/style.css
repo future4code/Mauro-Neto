@@ -9,6 +9,12 @@
     
 }
 
+#menu img{
+    display: inline;
+    width: 50px;
+    border-radius: 30px;
+}
+
 #menu li{
     display: inline;
     padding: 5px;
@@ -20,7 +26,7 @@ a{
     padding: 5px;
 }
 
-a:hover {
+a.efeito:hover {
     background-color:#D6D6D6;
     color: #6D6D6D;
     transition: background-color 0.5s , color 0.5s;
@@ -29,6 +35,15 @@ a:hover {
 
 #content{
     padding: 20px;
+}
+
+#content img{
+    width: 30%;
+    height: 30%;
+    display: flex;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #footer{
