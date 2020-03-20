@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="img/logomenu.jpeg" rel="shortcut icon" type="image/x-icon"/>
+</head>
+<body>
+    <div id="menu">
+        <ul>
+            <li><a href="index.html"><img src="img/logomenu.jpeg" alt="Infolab" /></a></li>
+            <li><a class="efeito" href="index.html">Home</a></li>
+            <li><a class="efeito" href="venda.html">Venda</a></li>
+            <li><a class="efeito" href="estoque.html">Estoque</a></li>
+            <li><a class="efeito" href="addproduto.html">Adicionar produto</a></li>
+            <li><a class="efeito" href="funcionarios.html">Funcionários</a></li>
+        </ul>
+        <div id="hist">
+            <p><a class="efeito" href="historico.html">Histórico de vendas</a></p>
+        </div>
+    </div>
+    <div id="content">
+            <h3 style="padding: 10px 20px">Venda de produtos</h3>
+        <form id="formulario">
+            <label for="funcionario">Qual funcionário está realizando a venda?</label>
+            <select name="funcionario">
+                <option></option>
+                <option value="mauro">José Mauro</option>
+                <option value="marcio">Márcio Cleiton</option>
+            </select>
+            <label for="produto">Selecione o produto a ser vendido:</label>
+            <select name="produto">
+                <option></option>
+                <option value="s145">Notebook Lenovo Ideapad S145</option>
+                <option value="hp246">Notebook HP 246-G7 9NH39LA + Office 365</option>
+                <option value="acer5">Notebook Acer Aspire 5 A515-52G-56UJ</option>
+                <option value="l3401050">Notebook Gamer Lenovo Ideapad L340-15IRH GTX 1050</option>
+                <option value="l3401650">Notebook Gamer Lenovo Ideapad L340-15IRH GTX 1650</option>
+            </select>
+            <label for="quantidade">Quantidade:</label>
+            <select name="quantidade"> 
+                <option></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <label for="pgto">Forma de pagamento:</label>
+            <select name="pgto">
+                <option></option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartão</option>
+            </select>
+            <input type="submit" value="Realizar venda" />
+        </form>
+    </div>
+    <div id="footer">
+        <p align="center">Copyright</p>
+    </div>
+</body>
+</html>

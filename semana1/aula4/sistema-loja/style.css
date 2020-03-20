@@ -4,20 +4,29 @@
 }
 
 #menu{
+    display:flex;
+    align-items:center;
     background-color: black;
     padding: 10px;
-    
+
 }
 
 #menu img{
-    display: inline;
     width: 50px;
     border-radius: 30px;
 }
-
+#menu ul{
+    display: inline-flex;
+    align-items:center;
+}
 #menu li{
     display: inline;
     padding: 5px;
+}
+
+#hist{
+    margin-left: auto;
+    text-align:right;
 }
 
 a{
@@ -53,7 +62,7 @@ a.efeito:hover {
 
 
 #estoque{
-    padding: 0 100px;
+    padding: 0 30px;
 }
 
 #estoque img{
@@ -66,18 +75,34 @@ td{
     padding: 20px 50px;
 }
 
-#adicionar{
+#formulario{
     padding: 0 20px;
 }
 
-#adicionar label{
-    padding: 20px 0;
+#formulario label{
+    margin: 5px 0;
+    display: block;
 }
-#adicionar input{
+#formulario input{
     width: 30%;
+    display: block;
+    margin: 5px 0;
+}
+
+#formulario select{
+    display: block;
+}
+
+input[type="submit"]{
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 #funcionarios{
     padding: 20px 0;
     list-style-type: none;
+    display:block;
 }
+

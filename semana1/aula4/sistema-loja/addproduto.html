@@ -8,30 +8,35 @@
     <link href="img/logomenu.jpeg" rel="shortcut icon" type="image/x-icon"/>
 </head>
 <body>
+    <div id="menu">
         <ul>
             <li><a href="index.html"><img src="img/logomenu.jpeg" alt="Infolab" /></a></li>
             <li><a class="efeito" href="index.html">Home</a></li>
+            <li><a class="efeito" href="venda.html">Venda</a></li>
             <li><a class="efeito" href="estoque.html">Estoque</a></li>
             <li><a class="efeito" href="addproduto.html">Adicionar produto</a></li>
             <li><a class="efeito" href="funcionarios.html">Funcionários</a></li>
         </ul>
+        <div id="hist">
+            <p><a class="efeito" href="historico.html">Histórico de vendas</a></p>
+        </div>
     </div>
     <div id="content">
             <h3 style="padding: 10px 20px">Cadastro de produtos</h3>
-        <form id="adicionar">
-            <label for="imagem">Selecione a imagem do produto</label><br />
-            <input type="file" id="imagem" name="imagem" accept="image/*"/><br />
-            <label for="produto">Nome do produto: </label><br />
-            <input type="text" id="produto" name="produto" /><br />
-            <label for="especificacoes">Especificações: </label><br />
-            <input type="text" id="especificacoes" name="especificacoes" /><br />
-            <label for="cor">Cor:</label><br />
-            <input type="text" id="cor" name="cor" /><br />
-            <label for="quantidade">Quantidade: </label><br />
-            <input type="text" id="quantidade" name="quantidade" /><br />
-            <label for="valor">Valor: </label><br />
-            <input type="text" id="valor" name="valor" /><br />
-            <br />
+        <form id="formulario">
+            <label for="imagem">Selecione a imagem do produto</label>
+            <input type="file" id="imagem" name="imagem" accept="image/*"/>
+            <label for="produto">Nome do produto: </label>
+            <input type="text" id="produto" name="produto" />
+            <label for="especificacoes">Especificações: </label>
+            <input type="text" id="especificacoes" name="especificacoes" />
+            <label for="cor">Cor:</label>
+            <input type="text" id="cor" name="cor" />
+            <label for="quantidade">Quantidade: </label>
+            <input type="text" id="quantidade" name="quantidade" />
+            <label for="valor">Valor: </label>
+            <input type="text" id="valor" name="valor" />
+            
             <input type="submit" value="Adicionar produto" />
         </form>
     </div>
