@@ -8,7 +8,6 @@
     align-items:center;
     background-color: black;
     padding: 10px;
-
 }
 
 #menu img{
@@ -60,6 +59,10 @@ a.efeito:hover {
     padding: 10px
 }
 
+#footer p{
+    text-align: center;
+}
+
 
 #estoque{
     padding: 0 30px;
@@ -69,10 +72,13 @@ a.efeito:hover {
     width: 250px;
 }
 
-td{
+#estoque td{
+    padding: 20px 50px
+}
+
+td, th{
     align-items: center;
     text-align: center;
-    padding: 20px 50px;
 }
 
 #formulario{
@@ -106,3 +112,14 @@ input[type="submit"]{
     display:block;
 }
 
+#funcionarios li{
+    margin: 10px 0;
+}
+
+#historico li{
+    list-style-type: none;
+}
+
+#historico td{
+    padding: 3px 50px;
+}
