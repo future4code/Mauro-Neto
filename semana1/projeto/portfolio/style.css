@@ -3,6 +3,7 @@
     padding: 0;
     background-color: #24292e;
     color: white;
+    scroll-behavior: smooth;
 }
 
 div{
@@ -36,14 +37,6 @@ div{
     font-family: Open Sans,sans-serif;
     font-size: 1.5em;
     padding-bottom: 10px;
-}
-
-#sobre{
-
-}
-
-#portfolio{
-
 }
 
 #redes{
@@ -81,6 +74,53 @@ a:hover {
 .divisoria{
     margin: 3vh 0;
     border-color: #404448
+}
+
+#sobre, #portfolio, #contato{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 8.5vh;
+}
+
+h2{
+    padding-bottom: 1.5vh;
+    font-size: 2em;
+}
+
+#sobre p{
+    padding: 15px 0;
+    font-size: 1.2em;
+}
+
+input{
+    display:block;
+}
+
+label{
+    display:block;
+    font-size: 1.2em;
+    padding: 10px 0;
+}
+
+#formulario{
+    width:30%;
+    height: 30%;
+}
+
+#nome, #email{
+    width: 100%;
+    height: 15%;
+}
+
+#texto{
+    width: 100%;
+    height: 70%;
+}
+
+#botao{
+    margin: 10px auto;
+    width: 15%;
+    border-radius: 5px;
 }
 
 #footer{
