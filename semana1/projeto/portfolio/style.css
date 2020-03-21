@@ -66,7 +66,7 @@ a:hover {
     width: 81%;
     height: 93vh;
     margin-left: 19vw;
-    padding: 2%;
+    padding: 0 5%;
     overflow: scroll;
     overflow-x:hidden;
 }
@@ -79,7 +79,7 @@ a:hover {
 #sobre, #portfolio, #contato{
     height: 100%;
     width: 100%;
-    margin-bottom: 8.5vh;
+    margin-bottom: 4vh;
 }
 
 h2{
@@ -87,9 +87,25 @@ h2{
     font-size: 2em;
 }
 
-#sobre p{
-    padding: 15px 0;
+#textosobre{
+    font-family: Open Sans,sans-serif;
+    padding: 15px 0 30px 0;
     font-size: 1.2em;
+}
+
+#habilidades{
+    list-style-type: circle;
+    width: 50%;
+}
+
+#habilidades li{
+    margin-left: 2%;
+}
+
+#habilidades li p{
+    font-family: Open Sans,sans-serif;
+    padding: 3px 0;
+    font-size: 1em;
 }
 
 #foto{
