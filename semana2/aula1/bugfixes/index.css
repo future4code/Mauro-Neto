@@ -74,6 +74,18 @@ div img {
     color: white;
 }
 
+ol{
+    list-style-type: decimal;
+    list-style-position: outside;
+    display: inline-block;
+}
+
+ol li p{
+    padding-left: 20px;
+    display: inline;
+    
+}
+
 #container-de-descricao>ol {
     padding: 15px 0px;
 }
