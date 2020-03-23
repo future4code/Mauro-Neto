@@ -52,6 +52,14 @@ div img {
     background-color: #c44f00;
 }
 
+.botaocomprar:hover{
+    background-color: #c44f00;
+}
+
+.botaocomprar:active{
+    background-color:#ffaf43;
+}
+
 .container {
     height: 500px;
     text-align: center;
