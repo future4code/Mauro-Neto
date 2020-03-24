@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: white;
+    text-align: center;
+}
+
+#content{
+    display: grid;
+}
+
+#header{
+    background-color: #2ECC40;
+    
+}
+
+#menu{
+    background-color: #FFDC00;
+   
+}
+
+#content1{
+    background-color: #f012be;
+    
+}
+#content2{
+    background-color: #0074d9;
+
+}
+
+#content3{
+    background-color: white;
+    
+}
+
+#image{
+    background-color: #ff4136;
+
+}
+#extra{
+    background-color: #01ff70;
+}
+
+#footer{
+    background-color: #b10dc9;
+   
+}

@@ -1,0 +1,87 @@
+/* Exercício 1*/
+justify-content: flex-end;
+
+/* Exercício 2 */
+justify-content:center;
+
+/* Exercício 3 */
+justify-content:space-around;
+
+/* Exercício 4 */
+justify-content: space-between;
+
+/* Exercício 5 */
+align-items: flex-end;
+
+/* Exercício 6 */
+align-items: center;
+justify-content: center;
+
+
+/* Exercício 7 */
+align-items: flex-end;
+justify-content: space-around;
+
+/* Exercício 8 */
+flex-direction: row-reverse;
+
+/* Exercício 9 */
+flex-direction: column;
+
+
+/* Exercício 10 */
+flex-direction: row-reverse;
+justify-content: flex-end;
+
+
+/* Exercício 11 */
+flex-direction: column;
+justify-content: flex-end;
+
+
+/* Exercício 12 */
+flex-direction: column-reverse;
+justify-content: space-between;
+
+/* Exercício 13 */
+flex-direction: row-reverse;
+justify-content: center;
+align-items: flex-end;
+
+/* Exercício 14 */
+order:1;
+
+/* Exercício 15 */
+order:-1;
+
+/* Exercício 16 */
+align-self: flex-end;
+
+/* Exercício 17 */
+align-self: flex-end;
+order: 1;
+
+/* Exercício 18 */
+flex-wrap:wrap;
+
+/* Exercício 19 */
+flex-wrap:wrap;
+flex-direction: column;
+
+/* Exercício 20 */
+flex-flow: column wrap;
+
+/* Exercício 21 */
+align-content:flex-start;
+
+/* Exercício 22 */
+align-content:flex-end;
+
+/* Exercício 23 */
+flex-direction: column-reverse;
+align-content:center;
+
+/* Exercício 24 */
+flex-flow: column-reverse wrap-reverse;
+justify-content: center;
+align-content:space-between;
