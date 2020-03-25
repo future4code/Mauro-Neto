@@ -118,6 +118,24 @@ ul{
     #wrapper{
         grid-template-columns: 1fr;
     }
+    #itensgrid{
+        grid-template-rows: repeat(8, 1fr);
+    }
+    .itens14{
+        grid-column: span 3;
+    }
+    .itens25{
+        grid-column: span 3;
+    }
+    .itens36{
+        grid-column: span 6;
+    }
+    .itens910{
+        grid-column: span 3;
+    }
+    #item11{
+        grid-column: span 6;
+    }
 }
 
 @media screen and (min-device-width : 801px) and (max-device-width : 1199px) {
