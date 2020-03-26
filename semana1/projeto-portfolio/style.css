@@ -61,9 +61,8 @@ a:hover, i:hover{
     transition: color 0.5s;
 }
 
-#content{
+main{
     display: inline-block;
-    width: 81%;
     height: 93vh;
     margin-left: 19vw;
     padding: 0 5%;
