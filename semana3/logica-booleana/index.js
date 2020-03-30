@@ -63,12 +63,12 @@ b. 0
 c. array.length
 
 d. I.  undefined
-index.js:31 II.  null
-index.js:35 III.  11
-index.js:38 IV.  3  e  4
-index.js:42 V.  19  e  9
-index.js:46 VI.  3
-index.js:51 VII.  1
+II.  null
+III.  11
+IV.  3  e  4
+V.  19  e  9
+VI.  3
+VII.  1
 
 */
 
