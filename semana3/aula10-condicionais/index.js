@@ -118,3 +118,151 @@ if(ossos === "s"){
 else{
     console.log("Animal invertebrado")
 }
+
+
+//Desafio
+
+const nome = prompt("Nome completo")
+const tipodejogo = prompt("IN indica internacional; e DO indica doméstico").toUpperCase()
+let valor
+
+if(tipodejogo === "IN" || tipodejogo === "DO"){
+    const etapa = prompt("SF indica semi-final; DT indica decisão de terceiro lugar; e FI indica final").toUpperCase()
+    if(etapa === "SF" || etapa === "DT" || etapa === "FI"){
+        const categoria = Number(prompt("Opções 1, 2, 3 ou 4;"))
+        if(categoria === 1 || categoria === 2 || categoria === 3 || categoria === 4){
+            const qtd = Number(prompt("Quantidade de ingressos"))
+            if(qtd>=0){
+                if(etapa==="SF"){
+                    switch(categoria){
+                        case 1:
+                            valor=1320;
+                            break;
+                        case 2:
+                            valor=880;
+                            break;
+                        case 3:
+                            valor=550;
+                            break;
+                        case 4:
+                            valor=220;
+                            break;
+                    }
+                    if(tipodejogo==="IN"){
+                        valor/=4.1;
+                        console.log("---Dados da compra---");
+                        console.log("Nome do cliente: "+nome);
+                        console.log("Tipo do jogo: Internacional");
+                        console.log("Etapa do jogo: Semifinal");
+                        console.log("Categoria: ", categoria);
+                        console.log("Quantidade de Ingressos: ", qtd +" ingressos");
+                        console.log("---Valores--- ");
+                        console.log("Valor do ingresso: US$",valor.toFixed(2));
+                        console.log("Valor total: US$", (valor*qtd).toFixed(2));
+                    }
+                    else{
+                        console.log("---Dados da compra---");
+                        console.log("Nome do cliente: "+nome);
+                        console.log("Tipo do jogo: Nacional");
+                        console.log("Etapa do jogo: Semifinal");
+                        console.log("Categoria: ", categoria);
+                        console.log("Quantidade de Ingressos: ", qtd +" ingressos");
+                        console.log("---Valores--- ");
+                        console.log("Valor do ingresso: R$",valor.toFixed(2));
+                        console.log("Valor total: R$", (valor*qtd).toFixed(2));
+                    }
+                }
+                if(etapa==="DT"){
+                    switch(categoria){
+                        case 1:
+                            valor=660;
+                            break;
+                        case 2:
+                            valor=440;
+                            break;
+                        case 3:
+                            valor=330;
+                            break;
+                        case 4:
+                            valor=170;
+                            break;
+                    }
+                    if(tipodejogo==="IN"){
+                        valor/=4.1;
+                        console.log("---Dados da compra---");
+                        console.log("Nome do cliente: "+nome);
+                        console.log("Tipo do jogo: Internacional");
+                        console.log("Etapa do jogo: Semifinal");
+                        console.log("Categoria: ", categoria);
+                        console.log("Quantidade de Ingressos: ", qtd +" ingressos");
+                        console.log("---Valores--- ");
+                        console.log("Valor do ingresso: US$",valor.toFixed(2));
+                        console.log("Valor total: US$", (valor*qtd).toFixed(2));
+                    }
+                    else{
+                        console.log("---Dados da compra---");
+                        console.log("Nome do cliente: "+nome);
+                        console.log("Tipo do jogo: Nacional");
+                        console.log("Etapa do jogo: Semifinal");
+                        console.log("Categoria: ", categoria);
+                        console.log("Quantidade de Ingressos: ", qtd +" ingressos");
+                        console.log("---Valores--- ");
+                        console.log("Valor do ingresso: R$",valor.toFixed(2));
+                        console.log("Valor total: R$", (valor*qtd).toFixed(2));
+                    }
+                }
+                else{
+                    switch(categoria){
+                        case 1:
+                            valor=1980;
+                            break;
+                        case 2:
+                            valor=1320;
+                            break;
+                        case 3:
+                            valor=880;
+                            break;
+                        case 4:
+                            valor=330;
+                            break;
+                    }
+                    if(tipodejogo==="IN"){
+                        valor/=4.1;
+                        console.log("---Dados da compra---");
+                        console.log("Nome do cliente: "+nome);
+                        console.log("Tipo do jogo: Internacional");
+                        console.log("Etapa do jogo: Semifinal");
+                        console.log("Categoria: ", categoria);
+                        console.log("Quantidade de Ingressos: ", qtd +" ingressos");
+                        console.log("---Valores--- ");
+                        console.log("Valor do ingresso: US$",valor.toFixed(2));
+                        console.log("Valor total: US$", (valor*qtd).toFixed(2));
+                    }
+                    else{
+                        console.log("---Dados da compra---");
+                        console.log("Nome do cliente: "+nome);
+                        console.log("Tipo do jogo: Nacional");
+                        console.log("Etapa do jogo: Semifinal");
+                        console.log("Categoria: ", categoria);
+                        console.log("Quantidade de Ingressos: ", qtd +" ingressos");
+                        console.log("---Valores--- ");
+                        console.log("Valor do ingresso: R$",valor.toFixed(2));
+                        console.log("Valor total: R$", (valor*qtd).toFixed(2));
+                    }
+                }
+            }
+            else{
+                console.log("Quantidade de ingressos inválida")
+            }
+        }
+        else{
+            console.log("Categoria inválida")
+        }
+    }
+    else{
+        console.log("Etapa inválida")
+    }
+}
+else{
+    console.log("Tipo de jogo inválido")
+}
