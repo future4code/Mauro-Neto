@@ -63,7 +63,7 @@ console.log(novoArray);
 
 //Desafio 2
 
-const jogador1 = Number(prompt("Jogador 1, digite o número para o jogador 2 acertar"))
+let jogador1 = Number(prompt("Jogador 1, digite o número para o jogador 2 acertar"))
 console.log("Vamos jogar!")
 
 let jogador2, tentativas = 1;
@@ -81,3 +81,31 @@ while(jogador2 !== jogador1){
     }
     tentativas++;
 }
+
+//Desafio 3
+
+jogador1 = Math.floor((Math.random() * 100) + 1); 
+console.log("Vamos jogar!")
+
+tentativas = 1;
+
+while(jogador2 !== jogador1){
+    jogador2 = Number(prompt("Adivinhe o número que o jogador 1 está pensando"));
+    if(jogador2 > jogador1){
+        console.log("Errrrrrrrou, é menor")
+    }
+    else if(jogador2 < jogador1){
+        console.log("Errrrrrrrou, é maior")
+    }
+    else{
+        console.log("Acertou!!\nO número de tentativas foi: ", tentativas);
+    }
+    tentativas++;
+}
+
+/*
+A alteração foi fácil de fazer. A função Math.floor arredonda para baixo o número para o número 
+inteiro mais próximo. A função Math.random só randomiza números entre 0 e 1, por isso tem que
+multiplicar por 100 para gerar números entre 0 e 99 nesse caso, e o +1 seria para poder
+de fato o 100 ser um número possível de se obter com a função..
+*/
