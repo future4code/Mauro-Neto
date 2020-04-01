@@ -87,7 +87,7 @@ while(jogador2 !== jogador1){
 jogador1 = Math.floor((Math.random() * 100) + 1); 
 console.log("Vamos jogar!")
 
-tentativas = 1;
+jogador2=undefined, tentativas = 1;
 
 while(jogador2 !== jogador1){
     jogador2 = Number(prompt("Adivinhe o número que o jogador 1 está pensando"));
@@ -107,5 +107,5 @@ while(jogador2 !== jogador1){
 A alteração foi fácil de fazer. A função Math.floor arredonda para baixo o número para o número 
 inteiro mais próximo. A função Math.random só randomiza números entre 0 e 1, por isso tem que
 multiplicar por 100 para gerar números entre 0 e 99 nesse caso, e o +1 seria para poder
-de fato o 100 ser um número possível de se obter com a função..
+de fato o 100 ser um número possível de se obter com a função.
 */
