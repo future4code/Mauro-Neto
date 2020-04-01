@@ -41,7 +41,7 @@ let novoArray = [];
 for(let numero of array){
     novoArray.push(numero/10);
 }
-console.log(novoArray)
+console.log(novoArray);
 
 //c
 novoArray = [];
@@ -51,12 +51,33 @@ for(let numero of array){
         novoArray.push(numero);
     }
 }
-console.log(novoArray)
+console.log(novoArray);
 
 //d
 novoArray = [];
 
 for(let i=0; i<array.length; i++){
-    novoArray.push("O elemento do index "+ i+" é "+ array[i])
+    novoArray.push("O elemento do index "+ i+" é "+ array[i]);
 }
 console.log(novoArray);
+
+//Desafio 2
+
+const jogador1 = Number(prompt("Jogador 1, digite o número para o jogador 2 acertar"))
+console.log("Vamos jogar!")
+
+let jogador2, tentativas = 1;
+
+while(jogador2 !== jogador1){
+    jogador2 = Number(prompt("Adivinhe o número que o jogador 1 está pensando"));
+    if(jogador2 > jogador1){
+        console.log("Errrrrrrrou, é menor")
+    }
+    else if(jogador2 < jogador1){
+        console.log("Errrrrrrrou, é maior")
+    }
+    else{
+        console.log("Acertou!!\nO número de tentativas foi: ", tentativas);
+    }
+    tentativas++;
+}
