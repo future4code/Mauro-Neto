@@ -48,9 +48,6 @@ function desafio(){
          pontosPc += carta.valor;
       }
 
-      console.log(cartasUsuario, cartasPc)
-      console.log(cartasUsuario+" - pontuação ", pontosUsuario)
-      console.log(cartasPc+" - pontuação ", pontosPc)
       if(((pontosUsuario > pontosPc) && pontosUsuario <= 21) || (pontosPc>21 && pontosUsuario<21)){
          alert("Suas cartas são "+ cartasUsuario +". Sua pontuação é "+ pontosUsuario+ ".\nAs cartas do computador são "+ cartasPc+ ". A pontuação do computador é "+ pontosPc+ ".\nO usuário ganhou!");
       }
