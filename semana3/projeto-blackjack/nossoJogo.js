@@ -14,7 +14,7 @@ function exercicio(){
    console.log ("Bem vindo ao jogo de BlackJack!");
    if(confirm("Deseja iniciar uma nova rodada?")){
       let pontosUsuario=0, pontosPc=0, cartasUsuario="Usuário - cartas: ", cartasPc="Computador - cartas: ";
-      
+
       for(let i=0; i<2; i++){
          let carta = comprarCarta(); 
          cartasUsuario += carta.texto+" "
