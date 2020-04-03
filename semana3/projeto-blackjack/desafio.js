@@ -42,7 +42,7 @@ function desafio(){
             break;
          }
       }
-      while(pontosPc < pontosUsuario){
+      while(pontosPc <= pontosUsuario && pontosUsuario<=21){
          let carta = comprarCarta(); 
          cartasPc.push(carta.texto)
          pontosPc += carta.valor;
