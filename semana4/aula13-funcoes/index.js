@@ -90,14 +90,19 @@ const seculo = (ano) => {
     romano=conversor(result);
     return romano;
 }
-
 //Exercício 6
 const array = [10, 23, 45, 78, 90, 52, 35, 67, 84, 22]
 
 //a
 const tamanho = (array) => {
-    return array.length
+    let qtd=0
+    for(i of lista){
+        qtd+=1
+    }
+    return qtd
 }
+
+console.log(quantidadeElemento(array))
 
 //b
 const par = (numero) => {
