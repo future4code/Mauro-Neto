@@ -102,8 +102,6 @@ const tamanho = (array) => {
     return qtd
 }
 
-console.log(quantidadeElemento(array))
-
 //b
 const par = (numero) => {
     if(numero%2==0){
