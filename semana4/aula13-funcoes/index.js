@@ -88,7 +88,7 @@ const seculo = (ano) => {
         result = Math.round(Math.floor(ano/100));
     }
     romano=conversor(result);
-    console.log(romano);
+    return romano;
 }
 
 //Exercício 6
