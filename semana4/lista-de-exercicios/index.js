@@ -12,5 +12,24 @@ a variável meuDinheiro recebe o valor retornado da função.
 Em seguida, deve-se printar no console o valor da variável meuDinheiro.
 
 
+Exercício 2
+Função:
+A função recebe dois parâmetros, sendo tipoDeInvestimento e valor.  Dentro dela, é criada uma variável
+valorAposInvestimento. Em seguida, o switch usa como base o tipoDeInvestimento, tendo cases dentro dela.
+Dependendo do tipoDeInvestimento, um cálculo é feito multiplicando o valor passado como parâmetro por
+um indice e o resultado é colocado na variável valorAposInvestimento. Tem também um caso default, que
+cria um alert ao usuario se o tipoDeInvestimento for inválido. No final, a função retorna o valorAposInvestimento.
+Global:
+São declaradas duas variáveis, que chamam a função com valores diferentes. 
+A primeira variável entra no case Ações, e tem o valor multiplicado por 1.1, ou seja, a variável 
+fica com o valor de 165.
+A segunda variável entra no case Default, que vai gerar um alert com "TIPO DE INVESTIMENTO INFORMADO 
+INCORRETO", e recebe o valor de undefined, já que não recebeu nenhum valor na função.
+O console vai printar "165" e "undefined"(sem aspas e em linhas distintas)
+
+
+
+
+
 */
 
