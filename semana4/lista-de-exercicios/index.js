@@ -33,12 +33,19 @@ São definidas 3 arrays, sendo uma com alguns valores e 2 vazias.
 O laço for varre a array numeros, e a cada vez que roda, é feita uma operação com o numero(valor atual
 dentro do array) comparando se o resto é igual a zero(ou seja, se é par ou ímpar). Se par, o elemento
 é adicionado a array1. Caso contrário(ímpar), o elemento é adicionado na array2.
-Em seguida é printado no console uma mensagem com "Quantidade total de números" + o tamanho da array numeros.
-Em outra "linha" printa o tamanho da array1 e na outra "linha" printa o tamanho da array2.
+Em seguida é printado no console uma mensagem com "Quantidade total de números14"(tamanho da array numeros).
+Em outra "linha" printa "6"(tamanho da array1, quantidade de pares) e na outra "linha" printa "8"(tamanho da 
+array2, quantidade de ímpares).
 
 
 Exercício 4
-
-
+É declarada uma array com alguns valores. Em seguida, são declaradas 2 variáveis, uma com valor de Infinity
+e outra com valor de 0.
+O laço for varre a array numeros, e a cada vez que roda, é feita uma operação com o numero(valor atual
+dentro do array) comparando se o numero é menor que numero1. Se for menor, numero1 recebe o valor de numero.
+Em seguida é feita outra comparação, comparando se numero é maior que numero2, e se a condição for satisfeita,
+numero2 recebe o valor de numero.
+Ao sair do laço são printados no console o numero1 e numero2, que serão o menor e o maior número da array,
+respectivamente, nesse caso, -10 e 1590.
 */
 
