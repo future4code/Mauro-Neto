@@ -85,4 +85,19 @@ d - true
 e - true
 */
 
-//Exercício 2
+/*
+Exercício 2
+
+O código não funciona, primeiramente porque o quantidadeDeNumerosPares não está definido e é "utilizado"
+num while, mas a utilização dele está errada. Mesmo se essa variável estivesse definida, iria rodar
+infinitamente, pois o i nunca iria atingir a condição, pois ele não é incrementado.
+Além disso, o console.log iria printar o valor de i multiplicado por 2.
+ */
+const quantidadeDeNumerosPares = 0
+const N = Number(prompt())
+for(let i=0; i<N*2; i++){
+    if(i%2==0){
+        console.log(i);
+    }
+}
+
