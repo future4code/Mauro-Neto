@@ -101,3 +101,18 @@ for(let i=0; i<N*2; i++){
     }
 }
 
+//Exercício 3
+
+function classificaTriangulo(a,b,c){
+    if(a===b && a===c){
+        return "Equilátero"
+    }
+    else if((a===b && a!==c) || (b===c && a!==b)){
+        return "Isósceles"
+    }
+    else{
+        return "Escaleno"
+    }
+}
+
+//Exercício 4
