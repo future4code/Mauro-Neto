@@ -28,7 +28,16 @@ INCORRETO", e recebe o valor de undefined, já que não recebeu nenhum valor na 
 O console vai printar "165" e "undefined"(sem aspas e em linhas distintas)
 
 
+Exercício 3
+São definidas 3 arrays, sendo uma com alguns valores e 2 vazias.
+O laço for varre a array numeros, e a cada vez que roda, é feita uma operação com o numero(valor atual
+dentro do array) comparando se o resto é igual a zero(ou seja, se é par ou ímpar). Se par, o elemento
+é adicionado a array1. Caso contrário(ímpar), o elemento é adicionado na array2.
+Em seguida é printado no console uma mensagem com "Quantidade total de números" + o tamanho da array numeros.
+Em outra "linha" printa o tamanho da array1 e na outra "linha" printa o tamanho da array2.
 
+
+Exercício 4
 
 
 */
