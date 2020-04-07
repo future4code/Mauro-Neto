@@ -1,0 +1,23 @@
+
+
+#planner{
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+h2{
+    display: inline;
+}
+
+.itens{
+    border: 1px solid black;
+}
+
+.itensmeio{
+    border-right: none;
+}
+
+#planner :first-child{
+    border-right: none;
+}
