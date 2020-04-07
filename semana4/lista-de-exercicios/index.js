@@ -102,7 +102,6 @@ for(let i=0; i<N*2; i++){
 }
 
 //Exercício 3
-
 function classificaTriangulo(a,b,c){
     if(a===b && a===c){
         return "Equilátero"
@@ -116,3 +115,31 @@ function classificaTriangulo(a,b,c){
 }
 
 //Exercício 4
+function maior(a,b){
+    let diferenca;
+    if(a>b){
+        console.log("O maior é: "+a);
+        diferenca=a-b;
+    } 
+    else if(b>a){
+        console.log("O maior é: "+b);
+        diferenca=b-a;
+    }
+    else{
+        console.log("Os números são iguais");
+        diferenca=a-b;
+    }
+    if(a%b === 0){
+        console.log(a+" é divisível por "+b);
+    }
+    else{
+        console.log(a+" não é divisível por "+b);
+    }
+    if(b%a === 0){
+        console.log(b+" é divisível por "+a);
+    }
+    else{
+        console.log(b+" não é divisível por "+a);
+    }
+    console.log("A diferença entre eles é "+diferenca);
+}
