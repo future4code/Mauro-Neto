@@ -22,6 +22,26 @@ ul{
     border-right: none;
 }
 
-#planner :first-child{
+div:first-of-type{
     border-right: none;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 420px) {
+    #planner{
+        grid-template-columns: 1fr;
+        grid-template-rows: (7, 1fr);
+    }
+    .itens{
+        width: 95vw;
+    }
+    .itensmeio{
+        border: 1px solid black;
+        border-top: none;
+    }
+    div:first-of-type{
+        border: 1px solid black;
+    }
+    div:last-of-type{
+        border-top:none;
+    }
 }

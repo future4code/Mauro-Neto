@@ -3,7 +3,6 @@ function adicionarTarefa(){
     const dia = document.getElementById("dia").value;
     const hora = document.getElementById("hora").value;
     const diaEHora = dia+hora;
-    console.log(diaEHora);
     if(atividade !== ""){
         document.getElementById(diaEHora).innerHTML += "<li onclick='riscar(this)'>"+atividade+"</li>"
         document.getElementById("atividade").value="";
