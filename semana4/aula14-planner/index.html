@@ -47,7 +47,6 @@
         <option value="novePM">21h</option>
         <option value="dezPM">22h</option>
         <option value="onzePM">23h</option>
-
       </select>
       <button id="adicionar" onclick="adicionarTarefa()">Adicionar</button>
       <button id="excluir" onclick="excluirTarefas()">Excluir todos os itens</button>
@@ -55,58 +54,206 @@
     <main id="planner">
       <div class="itens">
         <h2>Segunda-Feira</h2>
-        <ul id="segunda">
-          <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ol>
-        </ul>
+        <ol start="0" id="segunda">
+          <li><ul id="segundazero"></ul></li>
+          <li><ul id="segundauma"></ul></li>
+          <li><ul id="segundaduas"></ul></li>
+          <li><ul id="segundatres"></ul></li>
+          <li><ul id="segundaquatro"></ul></li>
+          <li><ul id="segundacinco"></ul></li>
+          <li><ul id="segundaseis"></ul></li>
+          <li><ul id="segundasete"></ul></li>
+          <li><ul id="segundaoito"></ul></li>
+          <li><ul id="segundanove"></ul></li>
+          <li><ul id="segundadez"></ul></li>
+          <li><ul id="segundaonze"></ul></li>
+          <li><ul id="segundadoze"></ul></li>
+          <li><ul id="segundaumaPM"></ul></li>
+          <li><ul id="segundaduasPM"></ul></li>
+          <li><ul id="segundatresPM"></ul></li>
+          <li><ul id="segundaquatroPM"></ul></li>
+          <li><ul id="segundacincoPM"></ul></li>
+          <li><ul id="segundaseisPM"></ul></li>
+          <li><ul id="segundasetePM"></ul></li>
+          <li><ul id="segundaoitoPM"></ul></li>
+          <li><ul id="segundanovePM"></ul></li>
+          <li><ul id="segundadezPM"></ul></li>
+          <li><ul id="segundaonzePM"></ul></li>
+        </ol>
       </div>
       <div class="itens itensmeio">
         <h2>Terça-Feira</h2>
-        <ul id="terca"></ul>
+        <ol start="0" id="terca">
+          <li><ul id="tercazero"></ul></li>
+          <li><ul id="tercauma"></ul></li>
+          <li><ul id="tercaduas"></ul></li>
+          <li><ul id="tercatres"></ul></li>
+          <li><ul id="tercaquatro"></ul></li>
+          <li><ul id="tercacinco"></ul></li>
+          <li><ul id="tercaseis"></ul></li>
+          <li><ul id="tercasete"></ul></li>
+          <li><ul id="tercaoito"></ul></li>
+          <li><ul id="tercanove"></ul></li>
+          <li><ul id="tercadez"></ul></li>
+          <li><ul id="tercaonze"></ul></li>
+          <li><ul id="tercadoze"></ul></li>
+          <li><ul id="tercaumaPM"></ul></li>
+          <li><ul id="tercaduasPM"></ul></li>
+          <li><ul id="tercatresPM"></ul></li>
+          <li><ul id="tercaquatroPM"></ul></li>
+          <li><ul id="tercacincoPM"></ul></li>
+          <li><ul id="tercaseisPM"></ul></li>
+          <li><ul id="tercasetePM"></ul></li>
+          <li><ul id="tercaoitoPM"></ul></li>
+          <li><ul id="tercanovePM"></ul></li>
+          <li><ul id="tercadezPM"></ul></li>
+          <li><ul id="tercaonzePM"></ul></li>
+        </ol>
       </div>
       <div class="itens itensmeio">
         <h2>Quarta-Feira</h2>
-        <ul id="quarta"></ul>
+        <ol start="0" id="quarta">
+          <li><ul id="quartazero"></ul></li>
+          <li><ul id="quartauma"></ul></li>
+          <li><ul id="quartaduas"></ul></li>
+          <li><ul id="quartatres"></ul></li>
+          <li><ul id="quartaquatro"></ul></li>
+          <li><ul id="quartacinco"></ul></li>
+          <li><ul id="quartaseis"></ul></li>
+          <li><ul id="quartasete"></ul></li>
+          <li><ul id="quartaoito"></ul></li>
+          <li><ul id="quartanove"></ul></li>
+          <li><ul id="quartadez"></ul></li>
+          <li><ul id="quartaonze"></ul></li>
+          <li><ul id="quartadoze"></ul></li>
+          <li><ul id="quartaumaPM"></ul></li>
+          <li><ul id="quartaduasPM"></ul></li>
+          <li><ul id="quartatresPM"></ul></li>
+          <li><ul id="quartaquatroPM"></ul></li>
+          <li><ul id="quartacincoPM"></ul></li>
+          <li><ul id="quartaseisPM"></ul></li>
+          <li><ul id="quartasetePM"></ul></li>
+          <li><ul id="quartaoitoPM"></ul></li>
+          <li><ul id="quartanovePM"></ul></li>
+          <li><ul id="quartadezPM"></ul></li>
+          <li><ul id="quartaonzePM"></ul></li>
+        </ol>
       </div>
       <div class="itens itensmeio">
         <h2>Quinta-Feira</h2>
-        <ul id="quinta"></ul>
+        <ol start="0" id="quinta">
+          <li><ul id="quintazero"></ul></li>
+          <li><ul id="quintauma"></ul></li>
+          <li><ul id="quintaduas"></ul></li>
+          <li><ul id="quintatres"></ul></li>
+          <li><ul id="quintaquatro"></ul></li>
+          <li><ul id="quintacinco"></ul></li>
+          <li><ul id="quintaseis"></ul></li>
+          <li><ul id="quintasete"></ul></li>
+          <li><ul id="quintaoito"></ul></li>
+          <li><ul id="quintanove"></ul></li>
+          <li><ul id="quintadez"></ul></li>
+          <li><ul id="quintaonze"></ul></li>
+          <li><ul id="quintadoze"></ul></li>
+          <li><ul id="quintaumaPM"></ul></li>
+          <li><ul id="quintaduasPM"></ul></li>
+          <li><ul id="quintatresPM"></ul></li>
+          <li><ul id="quintaquatroPM"></ul></li>
+          <li><ul id="quintacincoPM"></ul></li>
+          <li><ul id="quintaseisPM"></ul></li>
+          <li><ul id="quintasetePM"></ul></li>
+          <li><ul id="quintaoitoPM"></ul></li>
+          <li><ul id="quintanovePM"></ul></li>
+          <li><ul id="quintadezPM"></ul></li>
+          <li><ul id="quintaonzePM"></ul></li>
+        </ol>
       </div>
       <div class="itens itensmeio">
         <h2>Sexta-Feira</h2>
-        <ul id="sexta"></ul>
+        <ol start="0" id="sexta">
+          <li><ul id="sextazero"></ul></li>
+          <li><ul id="sextauma"></ul></li>
+          <li><ul id="sextaduas"></ul></li>
+          <li><ul id="sextatres"></ul></li>
+          <li><ul id="sextaquatro"></ul></li>
+          <li><ul id="sextacinco"></ul></li>
+          <li><ul id="sextaseis"></ul></li>
+          <li><ul id="sextasete"></ul></li>
+          <li><ul id="sextaoito"></ul></li>
+          <li><ul id="sextanove"></ul></li>
+          <li><ul id="sextadez"></ul></li>
+          <li><ul id="sextaonze"></ul></li>
+          <li><ul id="sextadoze"></ul></li>
+          <li><ul id="sextaumaPM"></ul></li>
+          <li><ul id="sextaduasPM"></ul></li>
+          <li><ul id="sextatresPM"></ul></li>
+          <li><ul id="sextaquatroPM"></ul></li>
+          <li><ul id="sextacincoPM"></ul></li>
+          <li><ul id="sextaseisPM"></ul></li>
+          <li><ul id="sextasetePM"></ul></li>
+          <li><ul id="sextaoitoPM"></ul></li>
+          <li><ul id="sextanovePM"></ul></li>
+          <li><ul id="sextadezPM"></ul></li>
+          <li><ul id="sextaonzePM"></ul></li>
+        </ol>
       </div>
       <div class="itens itensmeio">
         <h2>Sábado</h2>
-        <ul id="sabado"></ul>
+        <ol start="0" id="sabado">
+          <li><ul id="sabadozero"></ul></li>
+          <li><ul id="sabadouma"></ul></li>
+          <li><ul id="sabadoduas"></ul></li>
+          <li><ul id="sabadotres"></ul></li>
+          <li><ul id="sabadoquatro"></ul></li>
+          <li><ul id="sabadocinco"></ul></li>
+          <li><ul id="sabadoseis"></ul></li>
+          <li><ul id="sabadosete"></ul></li>
+          <li><ul id="sabadooito"></ul></li>
+          <li><ul id="sabadonove"></ul></li>
+          <li><ul id="sabadodez"></ul></li>
+          <li><ul id="sabadoonze"></ul></li>
+          <li><ul id="sabadodoze"></ul></li>
+          <li><ul id="sabadoumaPM"></ul></li>
+          <li><ul id="sabadoduasPM"></ul></li>
+          <li><ul id="sabadotresPM"></ul></li>
+          <li><ul id="sabadoquatroPM"></ul></li>
+          <li><ul id="sabadocincoPM"></ul></li>
+          <li><ul id="sabadoseisPM"></ul></li>
+          <li><ul id="sabadosetePM"></ul></li>
+          <li><ul id="sabadooitoPM"></ul></li>
+          <li><ul id="sabadonovePM"></ul></li>
+          <li><ul id="sabadodezPM"></ul></li>
+          <li><ul id="sabadoonzePM"></ul></li>
+        </ol>
       </div>
       <div class="itens">
         <h2>Domingo</h2>
-        <ul id="domingo"></ul>
+        <ol start="0" id="domingo">
+          <li><ul id="domingozero"></ul></li>
+          <li><ul id="domingouma"></ul></li>
+          <li><ul id="domingoduas"></ul></li>
+          <li><ul id="domingotres"></ul></li>
+          <li><ul id="domingoquatro"></ul></li>
+          <li><ul id="domingocinco"></ul></li>
+          <li><ul id="domingoseis"></ul></li>
+          <li><ul id="domingosete"></ul></li>
+          <li><ul id="domingooito"></ul></li>
+          <li><ul id="domingonove"></ul></li>
+          <li><ul id="domingodez"></ul></li>
+          <li><ul id="domingoonze"></ul></li>
+          <li><ul id="domingodoze"></ul></li>
+          <li><ul id="domingoumaPM"></ul></li>
+          <li><ul id="domingoduasPM"></ul></li>
+          <li><ul id="domingotresPM"></ul></li>
+          <li><ul id="domingoquatroPM"></ul></li>
+          <li><ul id="domingocincoPM"></ul></li>
+          <li><ul id="domingoseisPM"></ul></li>
+          <li><ul id="domingosetePM"></ul></li>
+          <li><ul id="domingooitoPM"></ul></li>
+          <li><ul id="domingonovePM"></ul></li>
+          <li><ul id="domingodezPM"></ul></li>
+          <li><ul id="domingoonzePM"></ul></li>
+        </ol>
       </div>
     </main>
   </body>

@@ -7,8 +7,12 @@
 h2{
     display: inline;
 }
+ol{
+    padding-left: 25px;
+}
+
 ul{
-    padding-left: 0;
+    padding-left: 15px;
 }
 .itens{
     border: 1px solid black;
