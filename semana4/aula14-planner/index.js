@@ -40,3 +40,10 @@ function riscar(risca){
         risca.style.textDecoration="line-through";
     }
 }
+
+function excluirTarefas(){
+    const apagar = document.getElementsByTagName("ul");
+    for(i=0; i<apagar.length; i++){
+        apagar[i].innerHTML="";
+    }
+}
