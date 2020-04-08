@@ -93,9 +93,10 @@ num while, mas a utilização dele está errada. Mesmo se essa variável estives
 infinitamente, pois o i nunca iria atingir a condição, pois ele não é incrementado.
 Além disso, o console.log iria printar o valor de i multiplicado por 2.
  */
-const N = Number(prompt())
-for(let i=0; i<N*2; i+=2){
-    console.log(i);
+function nPares(N){
+    for(let i=0; i<N*2; i+=2){
+        console.log(i);
+    }
 }
 
 //Exercício 3
