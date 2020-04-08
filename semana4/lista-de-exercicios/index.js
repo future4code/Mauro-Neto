@@ -210,3 +210,18 @@ const filme = {
 
 console.log("Venha assistir ao filme"+filme.titulo+", de "+filme.ano+", dirigido por "+filme.diretor+" e estrelado por "+filme.elenco);
 
+//Exercício 4
+const pessoa = {
+    nome: "Uma pessoa qualquer",
+    idade: 95,
+    email: "a@a.com",
+    endereco: "Rua sei lá, s/n"
+}
+
+function anonimizarPessoa(objeto){
+    const pessoaAnonima={
+        ...objeto,
+        nome: "Anônimo"
+    }
+    return pessoaAnonima
+}
