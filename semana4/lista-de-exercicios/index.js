@@ -200,3 +200,13 @@ function criaRetangulo(lado1, lado2){
     return objeto;
 }
 
+//Exercício 3
+const filme = {
+    titulo: "Velozes e Furiosos",
+    ano: 2001,
+    diretor: "Rob Cohen",
+    elenco: ["Paul Walker", "Vin Diesel", "Michelle Rodriguez", "Jordana Brewster"]
+}
+
+console.log("Venha assistir ao filme"+filme.titulo+", de "+filme.ano+", dirigido por "+filme.diretor+" e estrelado por "+filme.elenco);
+
