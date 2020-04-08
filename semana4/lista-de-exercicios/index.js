@@ -170,3 +170,10 @@ function segundoMaiorEMenor(array){
 }
 const array = [10, 23, 45, 78, 90, 52, 35, 67, 84, 22]
 segundoMaiorEMenor(array);
+
+//Exercício 2
+const hello = () => {
+    alert("Hello Future4")
+}
+
+hello();
