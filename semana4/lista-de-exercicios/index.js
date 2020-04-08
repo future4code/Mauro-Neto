@@ -189,3 +189,14 @@ Objetos são um conjunto de elementos que tem chaves e valores dentro. A chave �
 do array, e o valor seria o conteúdo dessa chave. Normalmente utilizamos arrays para informações com
 um tipo de variáveis, e objetos quando temos uma certa "estrutura", como por exemplo dados de uma pessoa.
 */
+//Exercício 2
+function criaRetangulo(lado1, lado2){
+    const objeto = {
+        largura: lado1,
+        altura: lado2,
+        perimetro: 2*(lado1+lado2),
+        area: (lado1*lado2)
+    }
+    return objeto;
+}
+
