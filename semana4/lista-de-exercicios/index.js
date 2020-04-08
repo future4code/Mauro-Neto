@@ -177,3 +177,15 @@ const hello = () => {
 }
 
 hello();
+
+/*
+
+Exercícios de objetos
+
+*/
+//Exercício 1
+/*Arrays são variáveis que possuem mais de um valor dentro do array. Cada valor fica em um índice.
+Objetos são um conjunto de elementos que tem chaves e valores dentro. A chave é como se fosse o "índice"
+do array, e o valor seria o conteúdo dessa chave. Normalmente utilizamos arrays para informações com
+um tipo de variáveis, e objetos quando temos uma certa "estrutura", como por exemplo dados de uma pessoa.
+*/
