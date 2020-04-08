@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="index.js" defer></script>
+    <link href="index.css" type="text/css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <aside>
+      <h1>Meu blog</h1>
+      <form id="formulario" >
+        <label for="titulo">Título</label>
+        <input type="text" name="titulo" id="titulo" placeholder="Título" required>
+        <label for="autor">Autor</label>
+        <input type="text" name="autor" id="autor" placeholder="Autor" required>
+        <label for="autor">Imagem</label>
+        <input type="text" name="imagem" id="imagem" placeholder="Insira a url da imagem a ser inserida" accept="image/*">
+        <label for="conteudo">Conteúdo</label>
+        <textarea name="conteudo" id="conteudo" placeholder="Conteúdo" required></textarea>
+        <button id="adicionar" onclick="adicionarConteudo(event)">Adicionar conteúdo</button>
+      </form>
+    </aside>
+    <main id="posts">
+      
+    </main>
+  </body>
+</html>
