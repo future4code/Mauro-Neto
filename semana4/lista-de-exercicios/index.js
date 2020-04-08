@@ -94,8 +94,8 @@ infinitamente, pois o i nunca iria atingir a condição, pois ele não é increm
 Além disso, o console.log iria printar o valor de i multiplicado por 2.
  */
 function nPares(N){
-    for(let i=0; i<N*2; i+=2){
-        console.log(i);
+    for(let i=0; i<N; i++){
+        console.log(i*2);
     }
 }
 
@@ -141,3 +141,32 @@ function maior(a,b){
     }
     console.log("A diferença entre eles é "+diferenca);
 }
+
+/*
+
+Exercícios de função
+
+*/
+//Exercício 1
+function segundoMaiorEMenor(array){
+    let maior=-Infinity,segundoMaior=-Infinity, menor=Infinity, segundoMenor=Infinity;
+    for(let i=0;i<array.length;i++){
+        if(array[i] > maior){
+            segundoMaior = maior;
+            maior = array[i];
+        }
+        else if(array[i]>segundoMaior && array[i]<maior){
+            segundoMaior = array[i];
+       }
+       if(array[i] < menor){
+            segundoMenor = menor;
+            menor = array[i];
+       }
+       else if(array[i]<segundoMenor && array[i]>menor){
+           segundoMenor = array[i]
+       }
+    }
+    console.log("Segundo maior: "+segundoMaior+"\nSegundo menor: "+segundoMenor);
+}
+const array = [10, 23, 45, 78, 90, 52, 35, 67, 84, 22]
+segundoMaiorEMenor(array);
