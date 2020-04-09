@@ -284,3 +284,24 @@ const arrayStringParImpar = array2.map(numero =>{
         return numero+" é ímpar"
     }
 })
+
+
+//Exercício 4
+const pessoas = [
+	{ nome: "Paula", idade: 12, altura: 1.8},
+	{ nome: "João", idade: 20, altura: 1.3},
+	{ nome: "Pedro", idade: 15, altura: 1.9},
+	{ nome: "Luciano", idade: 22, altura: 1.8},
+	{ nome: "Artur", idade: 10, altura: 1.2},
+	{ nome: "Soter", idade: 70, altura: 1.9}
+]
+
+//a
+const podeEntrar = pessoas.filter(pessoa => {
+    return pessoa.altura>=1.5 && pessoa.idade>14 && pessoa.idade<60
+})
+
+//b
+const naoPodeEntrar = pessoas.filter(pessoa => {
+    return pessoa.altura<1.5 || pessoa.idade<=14 || pessoa.idade>=60
+})
