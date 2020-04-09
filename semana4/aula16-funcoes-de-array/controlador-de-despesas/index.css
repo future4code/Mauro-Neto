@@ -1,0 +1,41 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+main{
+    box-sizing: border-box;
+    width: 100vw;
+    display: grid;
+    padding: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 3%;
+}
+
+#cadastro, #despesas, #extrato{
+    padding: 20px;
+    display: inline-block;
+    border: 1px solid orange;
+}
+
+section h2{
+    margin-bottom: 10px;
+}
+section h3{
+    margin-bottom: 18px;
+}
+
+section div{
+    margin-bottom: 15px;
+}
+button{
+    margin: 15px 0;
+}
+
+section ul{
+    margin-top: 15px;
+}
+
+li{
+    margin-left: 15px;
+}
