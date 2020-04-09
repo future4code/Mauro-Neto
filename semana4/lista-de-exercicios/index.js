@@ -262,3 +262,25 @@ const arrayCriancasEAdolescentes = arrayPessoas.filter(filtroIdade => {
 })
 
 
+//Exercício 3
+const array2 = [1, 2, 3, 4, 5, 6]
+
+//a
+const arrayDobrado = array2.map(numero =>{
+    return numero*2;
+})
+
+//b
+const arrayTriplicadoString = array2.map(numero =>{
+    return String(numero*3);
+})
+
+//c
+const arrayStringParImpar = array2.map(numero =>{
+    if(numero%2 === 0){
+        return numero+" é par"
+    }
+    else{
+        return numero+" é ímpar"
+    }
+})
