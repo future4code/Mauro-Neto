@@ -243,3 +243,22 @@ for(let elemento of array){
     console.log(elemento);
 }
 
+//Exercício 2
+const arrayPessoas = [
+	{ nome: "Pedro", idade: 20 },
+	{ nome: "João", idade: 10 },
+	{ nome: "Paula", idade: 12 },
+	{ nome: "Artur", idade: 89 } 
+]
+
+//a
+const arrayAdultos = arrayPessoas.filter(filtroIdade => {
+    return filtroIdade.idade>=20;
+})
+
+//b
+const arrayCriancasEAdolescentes = arrayPessoas.filter(filtroIdade => {
+    return filtroIdade.idade<20;
+})
+
+
