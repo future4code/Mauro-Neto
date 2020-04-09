@@ -225,3 +225,21 @@ function anonimizarPessoa(objeto){
     }
     return pessoaAnonima
 }
+
+/*
+
+Exercícios de funções de array
+
+*/
+//Exercício 1
+/*
+Podíamos usar laços para percorrer/iterar um array, Ex:
+1. let i=0
+while(i<array.length){ i++}
+2. for(let elemento of array){}
+3. for(i=0; i<array.length; i++){}
+*/
+for(let elemento of array){
+    console.log(elemento);
+}
+
