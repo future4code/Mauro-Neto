@@ -305,3 +305,27 @@ const podeEntrar = pessoas.filter(pessoa => {
 const naoPodeEntrar = pessoas.filter(pessoa => {
     return pessoa.altura<1.5 || pessoa.idade<=14 || pessoa.idade>=60
 })
+
+//Exercício 5
+const consultas = [
+	{ nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
+	{ nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
+	{ nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
+	{ nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
+]
+
+const email = consultas.map(consulta =>{
+    let tratamento, lembrar;
+    if(consulta.genero === "masculino"){
+        tratamento = "Sr."
+        lembrar = "lembrá-lo"
+    }
+    else{
+        tratamento = "Sra."
+        lembrar = "lembrá-la"
+    }
+    if(consulta.cancelada){
+        return `Olá, ${tratamento} ${consulta.nome}. Estamos enviando esta mensagem para ${lembrar} da sua consulta no dia ${consulta.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
+    }
+    return `Olá, ${tratamento} ${consulta.nome}. Infelizmente, sua consulta marcada para o dia ${consulta.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
+} )
