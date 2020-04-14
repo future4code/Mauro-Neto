@@ -25,11 +25,13 @@ function App() {
         />
       </div>
       <div className="page-section-container" id="contato">
+        <a href="mailto: jmauroneto@gmail.com">
         <CardPequeno 
           imagem="https://www.traum.com.br/wp-content/uploads/2018/06/email-icon-121-400x400.png" 
           nome="E-mail: " 
-          descricao="a@a.com" 
+          descricao="jmauroneto@gmail.com" 
         />
+        </a>
         <CardPequeno 
           imagem="https://image.flaticon.com/icons/svg/1239/1239525.svg" 
           nome="Endereço: " 
