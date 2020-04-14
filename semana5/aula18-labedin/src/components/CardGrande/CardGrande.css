@@ -7,6 +7,10 @@
     height: 200px;
 }
 
+a .bigcard-container:hover{
+    background-color: #dedede;
+}
+
 .bigcard-container > img {
     width: 70px;
     margin-right: 10px;

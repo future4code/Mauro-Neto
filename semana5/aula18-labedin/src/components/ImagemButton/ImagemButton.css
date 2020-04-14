@@ -8,6 +8,10 @@
     margin: 10px auto;
 }
 
+a .image-button-container:hover{
+    background-color: #dedede;
+}
+
 .image-button-container > img {
     width: 30px;
     margin-right: 10px;

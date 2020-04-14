@@ -4,7 +4,9 @@ import './Header.css'
 function Header() {
     return (
         <div className="header">
-            <h3>LabedIn</h3>
+            <a href="#inicio">
+                <h3>LabedIn</h3>
+            </a>
             <div className="menu">
                 <ul>
                     <li><a href="#inicio">Início</a></li>
