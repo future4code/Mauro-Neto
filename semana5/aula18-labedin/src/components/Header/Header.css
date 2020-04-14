@@ -1,0 +1,25 @@
+.header{
+    height: 50px;
+    background-color: #dedede;
+    width: 100vw;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+}
+
+li{
+    display: inline-block;
+    padding: 0 5px;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 799px){
+    .header{
+      justify-content: center;
+      position: static;
+    }
+    .menu{
+      display: none;
+    }
+  }
