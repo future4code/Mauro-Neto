@@ -10,7 +10,7 @@ if(confirm("Deseja iniciar uma nova rodada?")){
             cartasPc.push(carta.texto)
             pontosPc += carta.valor;
       }
-      if(pontosPc <= 21 || pontosPc <= 21){
+      if(pontosUsuario <= 21 || pontosPc <= 21){
          comparador=1;
       }
       else{
