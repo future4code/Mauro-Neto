@@ -1,0 +1,18 @@
+.share-container{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.input-mensagem {
+    align-self: center;
+    width: 85%;
+    margin-right: 5px;
+}
+
+.botoes-rede{
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
