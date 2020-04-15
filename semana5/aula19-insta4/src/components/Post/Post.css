@@ -1,0 +1,50 @@
+.post-container {
+    border: 1px solid gray;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.post-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    justify-content: space-between;
+}
+
+.post-footer {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+
+.perfilEFoto{
+    display: flex;
+    align-items: center;
+}
+
+.user-photo {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.share-icon{
+    margin-right: 5px;
+}
+
+.post-photo {
+    width: 100%;
+}
+
+.icones-direita{
+    display: flex;
+    align-items: center;
+}
+
+.iconesClicaveis{
+    cursor:pointer;
+}
