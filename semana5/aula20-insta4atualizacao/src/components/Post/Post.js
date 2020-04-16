@@ -107,10 +107,9 @@ class Post extends React.Component {
     })
   }
 
-  aoEnviarComentario = (event) => {
-    console.log(event);
+  aoEnviarComentario = (recebeComentario) => {
     const listaComentarios=this.state.comentarios;
-    //listaComentarios.push(recebeComentario)
+    listaComentarios.push(recebeComentario)
     this.setState({ comentarios: listaComentarios})
 
     this.setState({
@@ -125,9 +124,8 @@ class Post extends React.Component {
   }
 
   atualizaComentarios = () => {
-    console.log(this.state.posts)
     const listaDePosts = this.state.comentarios.map((post, index) =>{
-      return <h4>{post.valorComentario}</h4>
+      return <p key={index}>{post.valorComentario}</p>
     })
     return listaDePosts
   }
@@ -150,17 +148,14 @@ class Post extends React.Component {
     let componenteComentario, componenteCompartilhar
 
     if(this.state.comentando) {
-      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario} callbackPai="callbackDoFilho" />
+      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario}/>
     }
     if(this.state.compartilhando){
       componenteCompartilhar = <SecaoCompartilhar aoCompartilhar={this.aoCompartilhar} />
     }
 
 
-    
-
     const listaAtualizada = this.atualizaComentarios();
-
     return <PostContainer>
       <PostHeader>
         <PerfilEFoto>
@@ -187,7 +182,7 @@ class Post extends React.Component {
         </IconesDireita>
       </PostFooter>
       {componenteComentario}
-      {listaComentarios}
+      {listaAtualizada}
     </PostContainer>
   }
 }

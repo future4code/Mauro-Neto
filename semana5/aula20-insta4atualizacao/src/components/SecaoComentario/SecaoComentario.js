@@ -12,6 +12,10 @@ export class SecaoComentario extends Component {
 		})
 	}
 
+	comentar = (event) =>{
+        this.props.aoEnviar(this.state);
+	}
+
 	render() {
 		return <div className={'comment-container'}>
 			<input
@@ -20,7 +24,7 @@ export class SecaoComentario extends Component {
 				value={this.state.valorComentario}
 				onChange={this.onChangeComentario}
 			/>
-			<button onClick={this.props.aoEnviar}>Enviar</button>
+			<button onClick={this.comentar}>Enviar</button>
 		</div>
 	}
 }

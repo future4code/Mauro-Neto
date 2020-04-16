@@ -25,7 +25,6 @@ class App extends React.Component {
   }
 
   atualizaPosts = () => {
-    console.log(this.state.posts)
     const listaDePosts = this.state.posts.map((post, index) =>{
       return <Post 
                 key={index}
