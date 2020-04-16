@@ -1,0 +1,18 @@
+.form-post-container{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.input-usuario, .input-foto-perfil, .input-foto-post {
+    align-self: center;
+    width: 80%;
+    margin: 5px 0;
+}
+
+.botao-postar{
+    align-self: center;
+    width: 70%;
+    margin: 10px 0;
+}
