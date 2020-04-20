@@ -32,6 +32,9 @@ class Etapa1 extends React.Component {
 			escolaridade: event.target.value
 		})
     }
+    onClickEtapa1 = () => {
+        this.props.onClickProximaEtapa(this.state);
+    }
 
     render(){
         return(
@@ -61,15 +64,15 @@ class Etapa1 extends React.Component {
                     value={this.state.email}
                     onChange={this.onChangeEmail}
                 />
-                <p>4. Qual a sua escolaridade?</p>
-                <select value={this.state.escolaridade} onChange={this.onChangeEscolaridade}>
+                <label for="escolaridade">4. Qual a sua escolaridade?</label>
+                <select name="escolaridade" value={this.state.escolaridade} onChange={this.onChangeEscolaridade}>
                     <option></option>
                     <option value="EMI">Ensino médio incompleto</option>
                     <option value="EMC">Ensino médio completo</option>
                     <option value="ESI">Ensino superior incompleto</option>
                     <option value="ESC">Ensino superior completo</option>
                 </select>
-                <button onClick={this.props.onClickProximaEtapa}>Próxima etapa</button>
+                <button onClick={this.onClickEtapa1}>Próxima etapa</button>
             </div>
         );
     }

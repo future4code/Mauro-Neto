@@ -1,77 +1,42 @@
 import React from 'react';
-import './Etapa1.css'
+import './Etapa3.css'
 
-class Etapa1 extends React.Component {
+class Etapa3 extends React.Component {
     state={
-        nome: '',
-        idade: '',
-        email: '',
-        escolaridade: ''
+        motivo: '',
+        cursoComplementar: ''
     }
 
-    onChangeNome = (event) => {
+    onChangeMotivo = (event) => {
 		this.setState({
-			nome: event.target.value
+			motivo: event.target.value
 		})
     }
     
-    onChangeIdade = (event) => {
+    onChangeCursoComplementar = (event) => {
 		this.setState({
-			idade: event.target.value
+			cursoComplementar: event.target.value
 		})
-    }
-    
-    onChangeEmail = (event) => {
-		this.setState({
-			email: event.target.value
-		})
-    }
-    
-    onChangeEscolaridade = (event) => {
-		this.setState({
-			escolaridade: event.target.value
-		})
-    }
-    
-    testa = (event) =>{
-        console.log(this.state);
     }
 
     render(){
         return(
-            <div className="div-etapa1">
+            <div className="div-etapa3">
                 <h3>ETAPA 1 - DADOS GERAIS</h3>
-                <label for="nome">1. Qual o seu nome?</label>
+                <label for="motivo">5. Por que você não terminou um curso de graduação?</label>
                 <input 
                     type="text" 
-                    placeholder="Nome" 
-                    name="nome" 
-                    value={this.state.nome}
-                    onChange={this.onChangeNome}
+                    placeholder="Motivo" 
+                    name="motivo" 
+                    value={this.state.motivo}
+                    onChange={this.onChangeMotivo}
                 />
-                <label for="idade">2. Qual a sua idade?</label>
-                <input 
-                    type="number" 
-                    placeholder="Idade" 
-                    name="idade"
-                    value={this.state.idade}
-                    onChange={this.onChangeIdade}
-                />
-                <label for="email">3. Qual o seu e-mail?</label>
-                <input 
-                    type="email"
-                    placeholder= "E-mail"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onChangeEmail}
-                />
-                <p>4. Qual a sua escolaridade?</p>
-                <select value={this.state.escolaridade} onChange={this.onChangeEscolaridade}>
+                <label for="cursocomplementar">6. Você fez algum curso complementar?</label>
+                <select name="cursocomplementar" value={this.state.cursoComplementar} onChange={this.onChangeCursoComplementar}>
                     <option></option>
-                    <option value="EMI">Ensino médio incompleto</option>
-                    <option value="EMC">Ensino médio completo</option>
-                    <option value="ESI">Ensino superior incompleto</option>
-                    <option value="ESC">Ensino superior completo</option>
+                    <option value="nenhum">Nenhum</option>
+                    <option value="técnico">Curso técnico</option>
+                    <option value="inglês">Inglês</option>
                 </select>
                 <button onClick={this.props.onClickProximaEtapa}>Próxima etapa</button>
             </div>
@@ -81,4 +46,4 @@ class Etapa1 extends React.Component {
 }
 
 
-export default Etapa1;
+export default Etapa3;
