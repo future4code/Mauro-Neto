@@ -1,0 +1,13 @@
+.div-etapa1{
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin: 8px auto;
+}
+
+button{
+    display: block;
+    margin: 20px auto;
+}
