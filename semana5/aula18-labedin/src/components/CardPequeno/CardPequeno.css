@@ -1,0 +1,33 @@
+.smallcard-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding: 20px 10px;
+    margin-bottom: 10px;
+    height: 80px;
+}
+
+a .smallcard-container:hover{
+    background-color: #dedede;
+}
+
+.smallcard-container > img {
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.smallcard-container h4 {
+    margin-right: 7px;
+    display: inline;
+}
+
+.smallcard-container p{
+    display: inline;
+}
+
+.smallcard-container > div {
+    display: flex;
+    justify-items: flex-start;
+    align-items: center;
+}
