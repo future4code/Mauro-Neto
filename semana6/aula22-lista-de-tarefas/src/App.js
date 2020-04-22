@@ -54,6 +54,9 @@ class App extends React.Component {
   }
 
   adicionaTarefa = () => {
+    if(!this.state.valorInput){
+      return window.alert("Digite uma tarefa")
+    }
     const listaTarefas = this.state.lista;
     const itemLista = {
       id: Date.now(),
