@@ -51,6 +51,8 @@ const BotaoBuscar = styled.button`
 class Lista extends React.Component{
     state={
         listaDeUsuarios: [],
+        inputBuscaPorNome: '',
+        inputBuscaPorEmail: '',
     }
 
     componentDidMount(){
@@ -97,15 +99,51 @@ class Lista extends React.Component{
                 })
         }
     }
+
+    onChangeBuscaPorNome = (event) => {
+        this.setState({inputBuscaPorNome: event.target.value})
+    }
+
+    onChangeBuscaPorEmail = (event) => {
+        this.setState({inputBuscaPorEmail: event.target.value})
+    }
+
+    enviaComEnter = (event) =>{
+        if(event.key === 'Enter'){
+            this.buscaNaLista();
+        }
+    }
     
+    buscaNaLista = () => {
+        if(!this.state.inputBuscaPorNome && !this.state.inputBuscaPorEmail){
+            return alert("Digite alguma coisa para buscar")
+        }
+
+        axios
+            .get(
+                `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/search?name=${this.state.inputBuscaPorNome}&email=${this.state.inputBuscaPorEmail}`,
+                {
+                    headers: {
+                        Authorization: "mauro-neto-julian"
+                    }
+                }
+            )
+            .then(resposta =>{
+                console.log(resposta)
+            })
+            .catch(error => {
+                return alert(`Status do erro: ${error.response.status}\nMensagem: ${error.response.data.message}`)
+            });
+    }
 
     render(){
         return(
             <ContainerLista>
                 <h2>Usuários Cadastrados:</h2>
                 <CampoBuscar>
-                    <input type="text" placeholder="Buscar" />
-                    <BotaoBuscar>Buscar</BotaoBuscar>
+                    <input type="text" placeholder="Buscar por nome" value={this.state.inputBuscaPorNome} onChange={this.onChangeBuscaPorNome} onKeyDown={this.buscaComEnter}/>
+                    <input type="email" placeholder="Buscar por e-mail" value={this.state.inputBuscaPorEmail} onChange={this.onChangeBuscaPorEmail} onKeyDown={this.buscaComEnter}/>
+                    <BotaoBuscar onClick={this.buscaNaLista}>Buscar</BotaoBuscar>
                 </CampoBuscar>
                 <UlUsuarios>
                     {this.state.listaDeUsuarios.map(usuario =>{

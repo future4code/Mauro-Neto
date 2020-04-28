@@ -75,7 +75,7 @@ class Cadastro extends React.Component{
             .then(resposta =>{
                 return (
                     alert("Cadastro realizado com sucesso!"),
-                    this.setState({name: '', email: ''})
+                    this.setState({nome: '', email: ''})
                 )
             })
             .catch(error =>{
