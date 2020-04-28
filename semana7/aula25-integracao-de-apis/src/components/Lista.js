@@ -34,7 +34,7 @@ const CampoBuscar = styled.div`
     display: flex;
 `
 
-const BotaoBuscar = styled.button`
+const BotaoLista = styled.button`
     margin-left: 8px;
     height: 30px;
     width: 25%;
@@ -52,7 +52,7 @@ class Lista extends React.Component{
     state={
         listaDeUsuarios: [],
         inputBuscaPorNome: '',
-        inputBuscaPorEmail: '',
+        usuarioBuscado: ''
     }
 
     componentDidMount(){
@@ -104,24 +104,20 @@ class Lista extends React.Component{
         this.setState({inputBuscaPorNome: event.target.value})
     }
 
-    onChangeBuscaPorEmail = (event) => {
-        this.setState({inputBuscaPorEmail: event.target.value})
-    }
-
-    enviaComEnter = (event) =>{
+    buscaComEnter = (event) =>{
         if(event.key === 'Enter'){
             this.buscaNaLista();
         }
     }
     
     buscaNaLista = () => {
-        if(!this.state.inputBuscaPorNome && !this.state.inputBuscaPorEmail){
+        if(!this.state.inputBuscaPorNome){
             return alert("Digite alguma coisa para buscar")
         }
 
         axios
             .get(
-                `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/search?name=${this.state.inputBuscaPorNome}&email=${this.state.inputBuscaPorEmail}`,
+                `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/search?name=${this.state.inputBuscaPorNome}`,
                 {
                     headers: {
                         Authorization: "mauro-neto-julian"
@@ -129,33 +125,54 @@ class Lista extends React.Component{
                 }
             )
             .then(resposta =>{
-                console.log(resposta)
+                return this.setState({usuarioBuscado: resposta.data[0]})
             })
             .catch(error => {
                 return alert(`Status do erro: ${error.response.status}\nMensagem: ${error.response.data.message}`)
             });
     }
 
+    mostraLista = () =>{
+        this.setState({usuarioBuscado: '', inputBuscaPorNome:''});
+    }
+
     render(){
+        if(!this.state.usuarioBuscado){
+            return(
+                <ContainerLista>
+                    <h2>Usuários Cadastrados:</h2>
+                    <CampoBuscar>
+                        <input type="text" placeholder="Buscar por nome" value={this.state.inputBuscaPorNome} onChange={this.onChangeBuscaPorNome} onKeyDown={this.buscaComEnter}/>
+                        <BotaoLista onClick={this.buscaNaLista}>Buscar</BotaoLista>
+                    </CampoBuscar>
+                    <UlUsuarios>
+                        {this.state.listaDeUsuarios.map((usuario, index) =>{
+                            return (
+                                <DivItem>
+                                    <li key={index} onClick={()=>this.props.pegaId(usuario.id)}>{usuario.name}</li>
+                                    <XVermelho onClick={()=>this.deletaItem(usuario.id)}>X</XVermelho>
+                                </DivItem>
+                            )
+                        })}
+                    </UlUsuarios>
+                </ContainerLista>
+            );
+        }
         return(
             <ContainerLista>
-                <h2>Usuários Cadastrados:</h2>
-                <CampoBuscar>
-                    <input type="text" placeholder="Buscar por nome" value={this.state.inputBuscaPorNome} onChange={this.onChangeBuscaPorNome} onKeyDown={this.buscaComEnter}/>
-                    <input type="email" placeholder="Buscar por e-mail" value={this.state.inputBuscaPorEmail} onChange={this.onChangeBuscaPorEmail} onKeyDown={this.buscaComEnter}/>
-                    <BotaoBuscar onClick={this.buscaNaLista}>Buscar</BotaoBuscar>
-                </CampoBuscar>
-                <UlUsuarios>
-                    {this.state.listaDeUsuarios.map(usuario =>{
-                        return (
-                            <DivItem>
-                                <li onClick={()=>this.props.pegaId(usuario.id)}>{usuario.name}</li>
-                                <XVermelho onClick={()=>this.deletaItem(usuario.id)}>X</XVermelho>
-                            </DivItem>
-                        )
-                    })}
-                </UlUsuarios>
-            </ContainerLista>
+            <h2>Usuários Cadastrados:</h2>
+            <CampoBuscar>
+                <input type="text" placeholder="Buscar por nome" value={this.state.inputBuscaPorNome} onChange={this.onChangeBuscaPorNome} onKeyDown={this.buscaComEnter}/>
+                <BotaoLista onClick={this.buscaNaLista}>Buscar</BotaoLista>
+            </CampoBuscar>
+            <UlUsuarios>
+                <DivItem>
+                    <li onClick={()=>this.props.pegaId(this.state.usuarioBuscado.id)}>{this.state.usuarioBuscado.name}</li>
+                    <XVermelho onClick={()=>this.deletaItem(this.state.usuarioBuscado.id)}>X</XVermelho>
+                </DivItem>
+            </UlUsuarios>
+            <BotaoLista onClick={this.mostraLista}>Retorna para lista</BotaoLista>
+        </ContainerLista>
         );
     }
 }
