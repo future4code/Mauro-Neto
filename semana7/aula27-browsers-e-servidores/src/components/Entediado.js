@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import axios from 'axios'
 
-const DivApp = styled.div`
+const DivEntediado = styled.div`
   text-align: center;
 `
 const Titulo = styled.h3`
@@ -16,7 +16,7 @@ const Descricao = styled.p`
 `
 
 
-class App extends React.Component {
+class Entediado extends React.Component {
   state={
     atividade: undefined
   }
@@ -34,7 +34,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <DivApp>
+      <DivEntediado>
         <h1>Está entediado?</h1>
         <h3>Aperte o botão e descubra sugestões do que fazer</h3>
         <button onClick={this.descobrir}>Descobrir o que fazer</button>
@@ -62,9 +62,9 @@ class App extends React.Component {
             </div>
           </div>
         )}
-      </DivApp>
+      </DivEntediado>
     );
   }
 }
 
-export default App;
+export default Entediado;

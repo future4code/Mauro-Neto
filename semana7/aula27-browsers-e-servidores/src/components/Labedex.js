@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import axios from 'axios'
 
-const DivApp = styled.div`
+const DivPokedex = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +39,7 @@ const Botao = styled.button`
     }
 `
 
-class App extends React.Component {
+class Labedex extends React.Component {
   state={
     listaDePokemons: undefined,
     secaoDetalhes: false,
@@ -80,17 +80,17 @@ class App extends React.Component {
   render(){
     if(this.state.secaoDetalhes){
       return(
-        <DivApp>
+        <DivPokedex>
           <h1>Labedex - A Pokedex da Labenu</h1>
           <h3>#{this.state.pokemonSelecionado.id} - {this.state.pokemonSelecionado.name}</h3>
           <img alt={this.state.pokemonSelecionado.name} src={this.state.pokemonSelecionado.sprites.front_default} />
           <Botao onClick={this.voltaParaLista}>Voltar para lista</Botao>
-        </DivApp>
+        </DivPokedex>
       );
     }
 
     return (
-      <DivApp>
+      <DivPokedex>
         <h1>Labedex - A Pokedex da Labenu</h1>
         <h3>Temos {this.state.listaDePokemons && this.state.listaDePokemons.results.length} Pokémons cadastrados</h3>
         <p>Clique no nome do pokemón para ver detalhes ou use a pesquisa</p>
@@ -99,9 +99,9 @@ class App extends React.Component {
             return <LiItem key={index} onClick={()=>this.pegaDetalhes(index+1)}>#{index+1} - {pokemon.name}</LiItem>
           })}
         </UlPokemons>
-      </DivApp>
+      </DivPokedex>
     );
   }
 }
 
-export default App;
+export default Labedex;
