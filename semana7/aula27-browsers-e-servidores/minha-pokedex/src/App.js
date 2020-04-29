@@ -52,7 +52,7 @@ class App extends React.Component {
 
   pegaPokedex = () => {
     axios
-      .get('https://pokeapi.co/api/v2/pokemon?limit=964')
+      .get('https://pokeapi.co/api/v2/pokemon?limit=807')
       .then(resposta =>{
         return(this.setState({listaDePokemons: resposta.data}))
       })
@@ -92,7 +92,7 @@ class App extends React.Component {
     return (
       <DivApp>
         <h1>Labedex - A Pokedex da Labenu</h1>
-        <h3>Temos {this.state.listaDePokemons && this.state.listaDePokemons.count} Pokémons cadastrados</h3>
+        <h3>Temos {this.state.listaDePokemons && this.state.listaDePokemons.results.length} Pokémons cadastrados</h3>
         <p>Clique no nome do pokemón para ver detalhes ou use a pesquisa</p>
         <UlPokemons>
           {this.state.listaDePokemons && this.state.listaDePokemons.results.map((pokemon, index)=>{
