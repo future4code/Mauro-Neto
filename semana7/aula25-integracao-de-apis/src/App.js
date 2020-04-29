@@ -31,29 +31,28 @@ class App extends React.Component {
   }
 
   render(){
-    if(this.state.secao==="lista"){
-      return(
-        <DivApp>
-            <BotaoMudar onClick={this.mudaSecao} value="cadastro">Ir para página de registro</BotaoMudar>
-            <Lista pegaId={this.recebeId} />
+    switch(this.state.secao){
+      case "lista":
+        return(
+          <DivApp>
+              <BotaoMudar onClick={this.mudaSecao} value="cadastro">Ir para página de registro</BotaoMudar>
+              <Lista pegaId={this.recebeId} />
+            </DivApp>
+        );
+      case "detalhes":
+        return(
+          <DivApp>
+            <Detalhes id={this.state.id} voltar={this.voltaParaLista} />
           </DivApp>
-      );
+        );
+      default:
+        return(
+          <DivApp>
+            <BotaoMudar onClick={this.mudaSecao} value="lista">Ir para página de lista</BotaoMudar>
+            <Cadastro />
+          </DivApp>
+        );
     }
-
-    if(this.state.secao==="detalhes"){
-      return(
-        <DivApp>
-          <Detalhes id={this.state.id} voltar={this.voltaParaLista} />
-        </DivApp>
-      )
-    }
-
-    return(
-      <DivApp>
-        <BotaoMudar onClick={this.mudaSecao} value="lista">Ir para página de lista</BotaoMudar>
-        <Cadastro />
-      </DivApp>
-    );
   }
 }
 
