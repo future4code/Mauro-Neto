@@ -92,8 +92,11 @@ class Labedex extends React.Component {
     return (
       <DivPokedex>
         <h1>Labedex - A Pokedex da Labenu</h1>
-        <h3>Temos {this.state.listaDePokemons && this.state.listaDePokemons.results.length} Pokémons cadastrados</h3>
-        <p>Clique no nome do pokemón para ver detalhes ou use a pesquisa</p>
+        {this.state.listaDePokemons
+          ? <div><h3>Temos {this.state.listaDePokemons.results.length} Pokémons cadastrados</h3>
+            <p>Clique no nome do Pokemón para ver detalhes ou use a pesquisa</p></div>
+          : <h3>Carregando lista de Pokémons</h3>
+        }
         <UlPokemons>
           {this.state.listaDePokemons && this.state.listaDePokemons.results.map((pokemon, index)=>{
             return <LiItem key={index} onClick={()=>this.pegaDetalhes(index+1)}>#{index+1} - {pokemon.name}</LiItem>
