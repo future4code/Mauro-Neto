@@ -39,6 +39,13 @@ const Botao = styled.button`
     }
 `
 
+const CaracteristicasPokemon = styled.div`
+  display: inline-block;
+  padding: 3px;
+  margin: 3px;
+  background-color: #dedede;
+`
+
 class Labedex extends React.Component {
   state={
     listaDePokemons: undefined,
@@ -84,6 +91,30 @@ class Labedex extends React.Component {
           <h1>Labedex - A Pokedex da Labenu</h1>
           <h3>#{this.state.pokemonSelecionado.id} - {this.state.pokemonSelecionado.name}</h3>
           <img alt={this.state.pokemonSelecionado.name} src={this.state.pokemonSelecionado.sprites.front_default} />
+          <div>
+          <CaracteristicasPokemon>
+            <strong>Peso: </strong>{this.state.pokemonSelecionado.weight}
+          </CaracteristicasPokemon>
+          <CaracteristicasPokemon>
+            <strong>Altura: </strong>{this.state.pokemonSelecionado.height}
+          </CaracteristicasPokemon>
+          </div>
+          <div>
+            <strong>{this.state.pokemonSelecionado.types.length === 1 ? "Tipo:" : "Tipos:"}</strong>
+            {this.state.pokemonSelecionado.types.map(pokemon=>{
+              return (
+                <CaracteristicasPokemon>{pokemon.type.name}</CaracteristicasPokemon>
+              )
+            })}
+          </div>
+          <div>
+            <strong>{this.state.pokemonSelecionado.abilities.length === 1 ? "Habilidade:" : "Habilidades:"}</strong>
+            {this.state.pokemonSelecionado.abilities.map(pokemon=>{
+              return (
+                <CaracteristicasPokemon>{pokemon.ability.name}</CaracteristicasPokemon>
+              )
+            })}
+          </div>
           <Botao onClick={this.voltaParaLista}>Voltar para lista</Botao>
         </DivPokedex>
       );
