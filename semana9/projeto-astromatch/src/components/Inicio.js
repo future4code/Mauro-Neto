@@ -26,6 +26,7 @@ const Blur = styled.div`
   z-index: 1;
   position: absolute;
   top: 0;
+  backface-visibility: hidden;
 `
 
 const FotoPerfil = styled.img`
@@ -95,34 +96,67 @@ const Inicio = () => {
   const [perfil, setPerfil] = useState({})
 
   useEffect(()=>{
-    axios
-      .get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/person")
-      .then(resposta=>{
-        setPerfil(resposta.data.profile)
-        console.log(resposta.data.profile)
-      })
-      .catch(error => {
-        return alert(`Status do erro: ${error.response.status}\nMensagem: ${error.response.data.message}`)
-      })
-  }, [setPerfil])
+    pegaPerfil()
+  }, [])
 
-  return (
-      <DivInicio>
-        <DivPerfil>
-          <Blur imagem={perfil.photo} />
-          <FotoPerfil src={perfil.photo} alt={perfil.name} />
-          <DivDados>
-            <NomePerfil>{perfil.name},</NomePerfil>
-            <IdadePerfil>{perfil.age}</IdadePerfil>
-            <Descricao>{perfil.bio}</Descricao>
-          </DivDados>
-        </DivPerfil>
-        <DivEscolhas>
-          <Botao>X</Botao>
-          <Botao><i class="fas fa-heart"></i></Botao>
-        </DivEscolhas>
-      </DivInicio>
-  );
+  const pegaPerfil = () => {
+    console.log(perfil);
+    axios
+    .get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/person")
+    .then(resposta=>{
+      return setPerfil(resposta.data.profile)
+    })
+    .catch(error => {
+      return alert("Erro ao carregar perfil")
+    })
+  }
+
+  const onClickCurtida = (event) => {
+    const body={
+      id: perfil.id,
+      choice: event.currentTarget.value
+    }
+
+    setPerfil({})
+
+    axios
+      .post(
+        "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/choose-person", 
+        body
+      )
+      .then(resposta=>{
+        return pegaPerfil();
+      })
+      .catch(error=>{
+        return alert("Erro ao curtir, tente novamente")
+      })
+  }
+  if(perfil){
+    return (
+        <DivInicio>
+          <DivPerfil>
+              <Blur imagem={perfil.photo} />
+              <FotoPerfil src={perfil.photo} alt={perfil.name} />
+              <DivDados>
+                <NomePerfil>{perfil.name},</NomePerfil>
+                <IdadePerfil>{perfil.age}</IdadePerfil>
+                <Descricao>{perfil.bio}</Descricao>
+              </DivDados>
+          </DivPerfil>
+          <DivEscolhas>
+            <Botao onClick={onClickCurtida} value="false"><i class="fas fa-times"></i></Botao>
+            <Botao onClick={onClickCurtida} value="true"><i class="fas fa-heart"></i></Botao>
+          </DivEscolhas>
+        </DivInicio>
+    );
+  }
+  return(
+    <DivInicio>
+      <DivPerfil>
+        <h3>Você já visualizou todos os perfis</h3>
+      </DivPerfil>
+    </DivInicio>
+  )
 }
 
 export default Inicio;

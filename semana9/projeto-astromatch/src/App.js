@@ -4,6 +4,7 @@ import './Icons.css';
 import styled from 'styled-components'
 import Inicio from './components/Inicio';
 import Matches from './components/Matches';
+import axios from 'axios';
 
 
 const DivApp = styled.div`
@@ -52,28 +53,39 @@ const App = () => {
     setInicio(!inicio)
   }
 
+  const limparSwipes = () => {
+    axios
+      .put("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/clear")
+      .then(resposta =>{
+        return alert("Lista de swipes apagada com sucesso!")
+      })
+      .catch(error => {
+        return alert("Erro ao apagar lista, tente novamente")
+      })
+  }
+
   return (
     <DivApp>
-      <button>Limpar swipes e matches</button>
+      <button onClick={limparSwipes}>Limpar swipes e matches</button>
       
-        {inicio 
-          ? <DivInterna>
-              <Header>
-                <DivEspaco />
-                <Logo src={logo} />
-                <i class="fas fa-user-friends" onClick={mudaParaMatches}></i>
-              </Header>
-              <Inicio />
-            </DivInterna>
-          : <DivInterna>
-              <Header>
-                <i class="fas fa-arrow-left" onClick={mudaParaMatches}></i>
-                <Logo src={logo} />
-                <DivEspaco />
-              </Header>
-              <Matches />
-            </DivInterna>
-        }
+      {inicio 
+        ? <DivInterna>
+            <Header>
+              <DivEspaco />
+              <Logo src={logo} />
+              <i class="fas fa-user-friends" onClick={mudaParaMatches}></i>
+            </Header>
+            <Inicio />
+          </DivInterna>
+        : <DivInterna>
+            <Header>
+              <i class="fas fa-arrow-left" onClick={mudaParaMatches}></i>
+              <Logo src={logo} />
+              <DivEspaco />
+            </Header>
+            <Matches />
+          </DivInterna>
+      }
     </DivApp>
   );
 }
