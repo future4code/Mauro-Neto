@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios';
 
 const DivMatches = styled.div`
+  text-align: center;
   height: 100%;
   padding: 8px;
   display: flex;
@@ -23,6 +24,7 @@ const DivLista = styled.div`
   padding: 8px;
   display: flex;
   justify-content: left;
+  cursor: pointer;
   :hover{
     background-color: #dedede;
   }
@@ -35,8 +37,8 @@ const FotoPerfil = styled.img`
   margin-right: 8px;
 `
 
-const Matches = () => {
-  const [lista, setLista] = useState([])
+const Matches = (props) => {
+  const [lista, setLista] = useState(undefined)
 
   useEffect(()=>{
     axios
@@ -51,9 +53,10 @@ const Matches = () => {
 
   return (
       <DivMatches>
-        {lista.map(perfil=>{
+        {!lista && <p>Carregando lista de matches</p>}
+        {lista && lista.map(perfil=>{
           return(
-            <DivLista>
+            <DivLista onClick={()=>props.recebeInfo(perfil)}>
               <FotoPerfil src={perfil.photo} />
               <p>{perfil.name}</p>
             </DivLista>

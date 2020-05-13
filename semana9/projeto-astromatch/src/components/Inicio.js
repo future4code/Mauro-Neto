@@ -93,14 +93,13 @@ const Botao = styled.button`
 `
 
 const Inicio = () => {
-  const [perfil, setPerfil] = useState({})
+  const [perfil, setPerfil] = useState(undefined)
 
   useEffect(()=>{
     pegaPerfil()
   }, [])
 
   const pegaPerfil = () => {
-    console.log(perfil);
     axios
     .get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/person")
     .then(resposta=>{
@@ -117,7 +116,7 @@ const Inicio = () => {
       choice: event.currentTarget.value
     }
 
-    setPerfil({})
+    setPerfil(undefined)
 
     axios
       .post(
@@ -153,7 +152,7 @@ const Inicio = () => {
   return(
     <DivInicio>
       <DivPerfil>
-        <h3>Você já visualizou todos os perfis</h3>
+        {perfil===null ? <h3>Você já visualizou todos os perfis</h3> : <h3>Carregando perfil</h3>}
       </DivPerfil>
     </DivInicio>
   )

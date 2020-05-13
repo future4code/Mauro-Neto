@@ -4,6 +4,7 @@ import './Icons.css';
 import styled from 'styled-components'
 import Inicio from './components/Inicio';
 import Matches from './components/Matches';
+import Detalhes from './components/Detalhes';
 import axios from 'axios';
 
 
@@ -47,10 +48,17 @@ const Logo = styled.img`
 `
 
 const App = () => {
-  const [inicio, setInicio] = useState(true)
+  const [secao, setSecao] = useState("inicio")
+  const [perfilSelecionado, setPerfilSelecionado] = useState(undefined)
 
-  const mudaParaMatches = () => {
-    setInicio(!inicio)
+  const mudaSecao = (event) => {
+    setSecao(event.currentTarget.getAttribute("value"))
+  }
+
+  const recebeInfo = (perfil) => {
+    console.log(perfil);
+    setPerfilSelecionado(perfil)
+    setSecao("detalhes")
   }
 
   const limparSwipes = () => {
@@ -64,28 +72,51 @@ const App = () => {
       })
   }
 
-  return (
-    <DivApp>
-      <button onClick={limparSwipes}>Limpar swipes e matches</button>
-      
-      {inicio 
-        ? <DivInterna>
+  let secaoCarregada = undefined;
+
+  switch(secao){
+    case "matches":
+      secaoCarregada = (
+        <DivInterna>
+            <Header>
+              <i class="fas fa-arrow-left" onClick={mudaSecao} value="inicio"></i>
+              <Logo src={logo} />
+              <DivEspaco />
+            </Header>
+            <Matches recebeInfo={recebeInfo} />
+          </DivInterna>
+      )
+      break;
+    case "detalhes":
+        secaoCarregada = (
+          <DivInterna>
+            <Header>
+              <i class="fas fa-arrow-left" onClick={mudaSecao} value="matches"></i>
+              <Logo src={logo} />
+              <DivEspaco />
+            </Header>
+            <Detalhes perfil={perfilSelecionado} />
+          </DivInterna>
+        )
+      break;
+    default:
+      secaoCarregada = (
+        <DivInterna>
             <Header>
               <DivEspaco />
               <Logo src={logo} />
-              <i class="fas fa-user-friends" onClick={mudaParaMatches}></i>
+              <i class="fas fa-user-friends" onClick={mudaSecao} value="matches"></i>
             </Header>
             <Inicio />
           </DivInterna>
-        : <DivInterna>
-            <Header>
-              <i class="fas fa-arrow-left" onClick={mudaParaMatches}></i>
-              <Logo src={logo} />
-              <DivEspaco />
-            </Header>
-            <Matches />
-          </DivInterna>
-      }
+        )
+    break;
+  }
+
+  return (
+    <DivApp>
+      <button onClick={limparSwipes}>Limpar swipes e matches</button>
+      {secaoCarregada}
     </DivApp>
   );
 }
