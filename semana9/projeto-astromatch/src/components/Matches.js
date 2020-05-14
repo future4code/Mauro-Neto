@@ -38,23 +38,10 @@ const FotoPerfil = styled.img`
 `
 
 const Matches = (props) => {
-  const [lista, setLista] = useState(undefined)
-
-  useEffect(()=>{
-    axios
-      .get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/matches")
-      .then(resposta =>{
-        return setLista(resposta.data.matches)
-      })
-      .catch(error => {
-        return alert(`Erro ao carregar lista`)
-      })
-  }, [setLista])
-
   return (
       <DivMatches>
-        {!lista && <p>Carregando lista de matches</p>}
-        {lista && lista.map(perfil=>{
+        {!props.lista && <p>Carregando lista de matches</p>}
+        {props.lista && props.lista.map(perfil=>{
           return(
             <DivLista onClick={()=>props.recebeInfo(perfil)}>
               <FotoPerfil src={perfil.photo} />

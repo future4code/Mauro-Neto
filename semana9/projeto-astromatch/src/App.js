@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './img/logo.png';
-import './Icons.css';
 import styled from 'styled-components'
 import Inicio from './components/Inicio';
 import Matches from './components/Matches';
 import Detalhes from './components/Detalhes';
 import axios from 'axios';
-
+import PeopleIcon from '@material-ui/icons/People';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Badge from '@material-ui/core/Badge';
 
 const DivApp = styled.div`
   margin: 0;
@@ -41,22 +42,67 @@ const Header = styled.header`
 
 const DivEspaco = styled.div`
   width: 1.4em;
+  display: flex;
 `
 
 const Logo = styled.img`
   height: 100%;
 `
 
+const IconeCurtidas = styled(PeopleIcon)`
+  cursor: pointer;
+  color: #820095;
+`
+
+const IconeVoltar = styled(ArrowBackIcon)`
+  cursor: pointer;
+  color: #34AAA9;
+`
+
 const App = () => {
   const [secao, setSecao] = useState("inicio")
+  const [perfilCarregado, setPerfilCarregado] = useState(undefined)
+  const [listaDeMatches, setListaDeMatches] = useState(undefined)
   const [perfilSelecionado, setPerfilSelecionado] = useState(undefined)
 
   const mudaSecao = (event) => {
     setSecao(event.currentTarget.getAttribute("value"))
   }
 
+  useEffect(()=>{
+    carregaPerfil();
+    carregaLista();
+  }, [])
+
+  const carregaPerfil = () => {
+    setPerfilCarregado(undefined);
+    axios
+    .get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/person")
+    .then(resposta=>{
+      return setPerfilCarregado(resposta.data.profile)
+    })
+    .catch(error => {
+      return alert("Erro ao carregar perfil")
+    })
+  }
+
+  const carregaLista = () =>{
+    axios
+    .get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/matches")
+    .then(resposta =>{
+      return setListaDeMatches(resposta.data.matches)
+    })
+    .catch(error => {
+      return alert(`Erro ao carregar lista`)
+    })
+  }
+
+  const recarrega = () => {
+    carregaPerfil();
+    carregaLista();
+  }
+
   const recebeInfo = (perfil) => {
-    console.log(perfil);
     setPerfilSelecionado(perfil)
     setSecao("detalhes")
   }
@@ -65,7 +111,7 @@ const App = () => {
     axios
       .put("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/mauro-neto-julian/clear")
       .then(resposta =>{
-        return alert("Lista de swipes apagada com sucesso!")
+        return (alert("Lista de swipes apagada com sucesso!"), carregaLista(), carregaPerfil())
       })
       .catch(error => {
         return alert("Erro ao apagar lista, tente novamente")
@@ -79,11 +125,11 @@ const App = () => {
       secaoCarregada = (
         <DivInterna>
             <Header>
-              <i class="fas fa-arrow-left" onClick={mudaSecao} value="inicio"></i>
+              <IconeVoltar onClick={mudaSecao} value="inicio" />
               <Logo src={logo} />
               <DivEspaco />
             </Header>
-            <Matches recebeInfo={recebeInfo} />
+            <Matches recebeInfo={recebeInfo} lista={listaDeMatches} />
           </DivInterna>
       )
       break;
@@ -91,7 +137,7 @@ const App = () => {
         secaoCarregada = (
           <DivInterna>
             <Header>
-              <i class="fas fa-arrow-left" onClick={mudaSecao} value="matches"></i>
+              <IconeVoltar onClick={mudaSecao} value="matches" />
               <Logo src={logo} />
               <DivEspaco />
             </Header>
@@ -105,9 +151,14 @@ const App = () => {
             <Header>
               <DivEspaco />
               <Logo src={logo} />
-              <i class="fas fa-user-friends" onClick={mudaSecao} value="matches"></i>
+              {listaDeMatches 
+                ? <Badge badgeContent={listaDeMatches.length} color="secondary">
+                      <IconeCurtidas onClick={mudaSecao} value="matches" />
+                  </Badge>
+                : <IconeCurtidas onClick={mudaSecao} value="matches" />
+              }
             </Header>
-            <Inicio />
+            <Inicio perfil={perfilCarregado} recarrega={recarrega} />
           </DivInterna>
         )
     break;
