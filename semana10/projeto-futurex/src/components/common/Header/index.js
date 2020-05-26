@@ -1,27 +1,49 @@
 import React from 'react';
-import styled from 'styled-components'
-import logo from '../../../img/futurexheader2.png'
+import {useHistory} from 'react-router-dom';
+import styled from 'styled-components';
+import logo from '../../../img/futurexheader.png';
 
 const DivHeader = styled.header`
-    width: 100vw;
     height: 60px;
-    background-color: #ff6a0c;
+    background-color: #ff5f00;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 40px;
 `
 
 const Logo = styled.img`
-    max-height: 100%;
+    max-height: 90%;
+    width: 180px;
+    cursor: pointer;
+`
+
+const Menu = styled.ul`
+    list-style-type: none;
+    margin: 0;
+`
+
+const ItemMenu = styled.li`
+    display: inline;
+    font-weight: bold;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 0 8px;
 `
 
 const Header = () => {
-  return (
-    <DivHeader>
-      <Logo src={logo} />
-    </DivHeader>
-  );
+    const history = useHistory();
+
+    return (
+        <DivHeader>
+        <Logo src={logo} onClick={()=>history.push("/")}/>
+            <Menu>
+                <ItemMenu onClick={()=>history.push("/application-form")}>Inscrições</ItemMenu>
+                <ItemMenu onClick={()=>history.push("/login")}>Login</ItemMenu>
+            </Menu>
+        </DivHeader>
+    );
 }
 
 export default Header;
