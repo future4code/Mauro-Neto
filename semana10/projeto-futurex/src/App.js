@@ -7,6 +7,7 @@ import LoginPage from './components/pages/Loginpage';
 import CreateTripsPage from './components/pages/CreateTripsPage';
 import TripDetailsPage from './components/pages/TripDetailsPage';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -15,7 +16,7 @@ function App() {
           <HomePage />
         </Route>
         <Route exact path="/application-form">
-          <FormPage/>
+          <FormPage />
         </Route>
         <Route exact path="/login">
           <LoginPage />
@@ -24,7 +25,7 @@ function App() {
           <CreateTripsPage />
         </Route>
         <Route exact path="/trips/list">
-          <ListTripsPage/>
+          <ListTripsPage />
         </Route>
         <Route exact path="/trips/details">
           <TripDetailsPage />

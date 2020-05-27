@@ -15,7 +15,7 @@ const Main = styled.main`
     justify-content: center;
 `
 
-const HomePage = () => {
+const HomePage = (props) => {
   return (
     <DivApp>
       <Header />

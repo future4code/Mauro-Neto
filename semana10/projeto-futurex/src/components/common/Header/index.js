@@ -34,14 +34,29 @@ const ItemMenu = styled.li`
 
 const Header = () => {
     const history = useHistory();
+    let token = localStorage.getItem("token");
+
+    const logout = () => {
+        localStorage.removeItem("token")
+        token=null;
+        history.push("/")
+    }
 
     return (
         <DivHeader>
         <Logo src={logo} onClick={()=>history.push("/")}/>
-            <Menu>
-                <ItemMenu onClick={()=>history.push("/application-form")}>Inscrições</ItemMenu>
-                <ItemMenu onClick={()=>history.push("/login")}>Login</ItemMenu>
-            </Menu>
+            {!token &&
+                <Menu>
+                    <ItemMenu onClick={()=>history.push("/application-form")}>Inscrições</ItemMenu>
+                    <ItemMenu onClick={()=>history.push("/login")}>Login</ItemMenu>
+                </Menu>
+            }
+            {token &&
+                <Menu>
+                    <ItemMenu onClick={()=>history.push("/trips/list")}>Listar Viagens</ItemMenu>
+                    <ItemMenu onClick={logout}>Sair</ItemMenu>
+                </Menu>
+            }
         </DivHeader>
     );
 }

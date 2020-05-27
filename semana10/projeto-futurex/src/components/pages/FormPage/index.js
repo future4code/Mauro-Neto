@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
+import React from 'react';
 import styled from 'styled-components'
 import Header from '../../common/Header'
 import Footer from '../../common/Footer'
+import { useLista } from '../../hooks/useLista';
 
 const DivConteudo = styled.div`
   width: 100%;
@@ -28,20 +28,8 @@ const Legenda=styled.label`
 
 
 const FormPage = () => {
-  const [lista, setLista] = useState([]);
-
-  useEffect(()=>{
-    pegaListaDeViagens();
-  }, [])
-
-  const pegaListaDeViagens = () => {
-    axios
-      .get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/mauro-neto-julian/trips")
-      .then(response=>{
-        setLista(response.data.trips)
-      })
-      .catch(error=>alert("Erro ao pegar lista de viagens"))
-  }
+  const lista = useLista();
+  
   return ( lista &&
     <div>
       <Header />

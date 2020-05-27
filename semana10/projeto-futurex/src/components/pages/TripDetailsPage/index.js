@@ -7,7 +7,7 @@ const DivApp = styled.div`
   text-align: center;
 `
 
-const TripDetailsPage = () => {
+const TripDetailsPage = (props) => {
   return (
     <DivApp>
       <Header />
