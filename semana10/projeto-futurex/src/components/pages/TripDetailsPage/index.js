@@ -35,7 +35,7 @@ const TripDetailsPage = () => {
       .catch(error => {
         console.log(error.response)
       })
-  }, [setViagem])
+  }, [setViagem, pathParams, token])
 
   return (viagem &&
     <DivApp>
@@ -47,7 +47,7 @@ const TripDetailsPage = () => {
           <h3>Candidatos: </h3>
           <ul>
             {viagem.candidates.map(candidato=>{
-              return <li>{candidato.name}</li>
+              return <li key={candidato.id}>{candidato.name}</li>
             })}
           </ul>
         </div>
