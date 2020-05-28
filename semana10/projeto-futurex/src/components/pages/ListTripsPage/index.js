@@ -81,7 +81,7 @@ const ListTripsPage = () => {
   const history=useHistory();
   const token = localStorage.getItem("token");
   const lista = useLista();
-  
+
   if(token===null)
     history.push('/login')
 
@@ -99,7 +99,7 @@ const ListTripsPage = () => {
         </CardViagem>
         {lista.map((viagem, index)=>{
           const url = `https://picsum.photos/200/200?a=${index}`
-          return <CardViagem key={viagem.id}>
+          return <CardViagem key={viagem.id} onClick={()=>history.push(`/trips/details/${viagem.id}`)}>
             <DivImagem>
               <Blur imagem={url} />
               <Imagem src={url} alt={viagem.name} />
