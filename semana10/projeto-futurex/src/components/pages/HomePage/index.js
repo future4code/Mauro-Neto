@@ -14,7 +14,8 @@ const Main = styled.main`
     justify-content: center;
 `
 
-const HomePage = (props) => {
+const HomePage = () => {
+  document.title="Future X"
   return (
     <DivApp>
       <Header />

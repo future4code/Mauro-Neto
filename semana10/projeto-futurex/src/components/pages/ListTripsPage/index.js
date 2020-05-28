@@ -77,10 +77,10 @@ const TextoData = styled.p`
 `
 
 const ListTripsPage = () => {
+  document.title="Lista de Viagens"
   const history=useHistory();
   const token = localStorage.getItem("token");
   const lista = useLista();
-  console.log(lista);
   
   if(token===null)
     history.push('/login')

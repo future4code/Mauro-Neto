@@ -4,13 +4,12 @@ import {useHistory} from 'react-router-dom'
 import Header from '../../common/Header'
 import Footer from '../../common/Footer'
 
-const DivApp = styled.div`
-  text-align: center;
-`
-
-const CreateTripsPage = (props) => {
+const CreateTripsPage = () => {
+  document.title = "Criar Viagem"
   const history=useHistory();
-  if(props.token===null)
+  const token = localStorage.getItem("token");
+
+  if(token===null)
     history.push('/login')
 
   return (

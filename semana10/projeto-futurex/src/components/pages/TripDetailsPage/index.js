@@ -8,6 +8,7 @@ const DivApp = styled.div`
 `
 
 const TripDetailsPage = (props) => {
+  document.title="Detalhes da viagem"
   return (
     <DivApp>
       <Header />

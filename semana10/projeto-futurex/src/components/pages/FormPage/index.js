@@ -42,6 +42,7 @@ const Botao = styled.button`
 `
 
 const FormPage = () => {
+  document.title="Formulário de Inscrição"
   const {form, changeValue} = useForm({name:'', age:'', trip:'', applicationText:'', profession:'', country: ''})
   const lista = useLista();
 

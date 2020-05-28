@@ -32,6 +32,7 @@ const Botao = styled.button`
 `
   
 const LoginPage = () => {
+  document.title="Login"
   const history = useHistory();
   const{form, changeValue} = useForm({email: '', password:''})
 
