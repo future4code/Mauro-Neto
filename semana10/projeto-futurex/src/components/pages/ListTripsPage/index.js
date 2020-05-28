@@ -4,15 +4,20 @@ import {useHistory} from 'react-router-dom'
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import { useLista } from '../../hooks/useLista';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+
+const DivTitulo = styled.div`
+  text-align: center;
+`
 
 const DivViagens=styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(${props => props.linhas}, 1fr);
-  gap: 10px;
-  column-gap: 10px;
+  gap: 15px;
+  column-gap: 15px;
   justify-content: center;
-  padding: 10px;
+  padding: 15px;
 `
 
 const CardViagem = styled.div`
@@ -21,12 +26,61 @@ const CardViagem = styled.div`
   align-items: center;
   justify-content: flex-start;
   border: 1px solid black;
+  cursor: pointer;
+  :first-of-type{
+    justify-content: center;
+  }
+  :hover{
+    opacity: 0.7;
+    transition: 1s;
+  }
+`
+
+const DivImagem = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`
+
+const Blur = styled.div`
+  height: 200px;
+  width: 100%;
+  background-image: url(${props => props.imagem});
+  filter: blur(2px);
+  z-index: 1;
+  position: absolute;
+  top: 0%;
+`
+
+const Imagem = styled.img`
+  max-width: 100%;
+  z-index: 2;
+`
+
+const DivDescricao = styled.div`
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  text-align: left;
+`
+
+const TextoTitulo = styled.h3`
+  margin-bottom: 3px;
+`
+
+const TextoData = styled.p`
+  font-style: italic;
+  font-size: 0.9em;
+  margin: 0;
 `
 
 const ListTripsPage = () => {
   const history=useHistory();
   const token = localStorage.getItem("token");
   const lista = useLista();
+  console.log(lista);
   
   if(token===null)
     history.push('/login')
@@ -34,13 +88,29 @@ const ListTripsPage = () => {
   return (
     <div>
       <Header />
+      <DivTitulo>
+        <h2>Nossas Viagens</h2>
+        <p>Clique no card para ver detalhes</p>
+      </DivTitulo>
       <DivViagens linhas={Math.ceil(lista.length/4)}>
-        <CardViagem>
-          Adicionar viagem
+        <CardViagem  onClick={()=>history.push("/trips/create")}>
+          <AddCircleIcon />
+          <p>Adicionar viagem</p>
         </CardViagem>
-        {lista.map(viagem=>{
-          return <CardViagem>
-            teste
+        {lista.map((viagem, index)=>{
+          const url = `https://picsum.photos/200/200?a=${index}`
+          return <CardViagem key={viagem.id}>
+            <DivImagem>
+              <Blur imagem={url} />
+              <Imagem src={url} alt={viagem.name} />
+            </DivImagem>
+            <DivDescricao>
+              <TextoTitulo>{viagem.name}</TextoTitulo>
+              <TextoData>Data: {viagem.date}</TextoData>
+              <p>{viagem.description}</p>
+              <p><strong>Dias terrestres: </strong>{viagem.durationInDays}</p>
+              <p><strong>Planeta: </strong>{viagem.planet}</p>
+            </DivDescricao>
           </CardViagem>
         })}
       </DivViagens>

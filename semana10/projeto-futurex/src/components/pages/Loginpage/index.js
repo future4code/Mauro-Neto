@@ -42,7 +42,6 @@ const LoginPage = () => {
 
   const logar = (event) => {
       event.preventDefault();
-
       const body = {
         email: form.email,
         password: form.password

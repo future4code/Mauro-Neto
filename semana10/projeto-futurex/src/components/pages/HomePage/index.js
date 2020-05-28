@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import logo from '../../../img/futurex.png'
 import Header from '../../common/Header'
@@ -9,7 +9,6 @@ const DivApp = styled.div`
 `
 
 const Main = styled.main`
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,7 +19,7 @@ const HomePage = (props) => {
     <DivApp>
       <Header />
       <Main>
-        <img src={logo} />
+        <img src={logo} alt="FutureX" />
       </Main>
       <Footer />
     </DivApp>

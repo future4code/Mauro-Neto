@@ -12,7 +12,7 @@ export const useLista = () => {
         setLista(response.data.trips)
       })
       .catch(error=>alert("Erro ao pegar lista de viagens"))
-  }, setLista)
+  }, [setLista])
 
   return lista;
 }

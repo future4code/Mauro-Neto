@@ -47,13 +47,16 @@ const Header = () => {
         <Logo src={logo} onClick={()=>history.push("/")}/>
             {!token &&
                 <Menu>
+                    <ItemMenu onClick={()=>history.push("/")}>Home</ItemMenu>
                     <ItemMenu onClick={()=>history.push("/application-form")}>Inscrições</ItemMenu>
                     <ItemMenu onClick={()=>history.push("/login")}>Login</ItemMenu>
                 </Menu>
             }
             {token &&
                 <Menu>
+                    <ItemMenu onClick={()=>history.push("/")}>Home</ItemMenu>
                     <ItemMenu onClick={()=>history.push("/trips/list")}>Listar Viagens</ItemMenu>
+                    <ItemMenu onClick={()=>history.push("/trips/create")}>Criar Viagem</ItemMenu>
                     <ItemMenu onClick={logout}>Sair</ItemMenu>
                 </Menu>
             }
