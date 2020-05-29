@@ -80,12 +80,15 @@ const TripDetailsPage = () => {
   const [candidatoDetalhes, setCandidatoDetalhes] = useState(undefined)
   const [filtraCandidatos, setFiltraCandidatos] = useState("aguardando")
   const [listaDeCandidatos, setListaDeCandidatos] = useState(undefined)
-  const [update, setUpdate] = useState(false);
 
   if(token===null)
     history.push('/login')
 
   useEffect(()=>{
+    pegaLista();
+  }, [pegaLista])
+
+  const pegaLista = () => {
     axios
       .get(`${baseUrl}/trip/${pathParams.idviagem}`, 
           {
@@ -100,7 +103,7 @@ const TripDetailsPage = () => {
       .catch(error => {
         alert("Erro ao carregar detalhes da viagem")
       })
-  }, [setViagem, pathParams, token, setListaDeCandidatos, update])
+  }
 
   const decidirAprovacao = (aceito, idCandidato) => {
     const body = {
@@ -116,7 +119,7 @@ const TripDetailsPage = () => {
         }
       )
       .then(response=>{
-        setUpdate(!update)
+        pegaLista();
       })
       .catch(error=>{
         alert("Erro ao aprovar/recusar candidato")
