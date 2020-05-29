@@ -67,7 +67,7 @@ const CandidateDetailsPage = () => {
         setViagem(response.data.trip)
       })
       .catch(error => {
-        console.log(error.response)
+        alert("Erro ao carregar detalhes do usuário")
       })
   }, [setViagem, pathParams, token])
 

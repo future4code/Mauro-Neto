@@ -80,6 +80,7 @@ const TripDetailsPage = () => {
   const [candidatoDetalhes, setCandidatoDetalhes] = useState(undefined)
   const [filtraCandidatos, setFiltraCandidatos] = useState("aguardando")
   const [listaDeCandidatos, setListaDeCandidatos] = useState(undefined)
+  const [update, setUpdate] = useState(false);
 
   if(token===null)
     history.push('/login')
@@ -97,9 +98,9 @@ const TripDetailsPage = () => {
         setListaDeCandidatos(response.data.trip.candidates)
       })
       .catch(error => {
-        console.log(error.response)
+        alert("Erro ao carregar detalhes da viagem")
       })
-  }, [setViagem, pathParams, token, setListaDeCandidatos])
+  }, [setViagem, pathParams, token, setListaDeCandidatos, update])
 
   const decidirAprovacao = (aceito, idCandidato) => {
     const body = {
@@ -115,10 +116,10 @@ const TripDetailsPage = () => {
         }
       )
       .then(response=>{
-        console.log(response);
+        setUpdate(!update)
       })
       .catch(error=>{
-        console.log(error.response);
+        alert("Erro ao aprovar/recusar candidato")
       })
   }
 
