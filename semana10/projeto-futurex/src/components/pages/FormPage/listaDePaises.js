@@ -23,7 +23,6 @@ export const listaDePaises=[
     <option key='20' value="Benin">Benin</option>,
     <option key='21' value="Bermudas">Bermudas</option>,
     <option key='22' value="Botsuana">Botsuana</option>,
-    <option key='23' value="Brasil">Brasil</option>,
     <option key='24' value="Brunei">Brunei</option>,
     <option key='25' value="Bulgária">Bulgária</option>,
     <option key='26' value="Burkina Fasso">Burkina Fasso</option>,

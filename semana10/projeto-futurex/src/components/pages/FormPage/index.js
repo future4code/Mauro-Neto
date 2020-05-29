@@ -11,24 +11,23 @@ import {baseUrl} from '../../common/baseUrl';
 const DivConteudo = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
-`
-
-const DivForm = styled.div`
-  display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 25%;
 `
 
 const Formulario = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 25%;
 `
 
 const Input = styled.input`
+  width: 90%;
+`
+
+const TextArea = styled.textarea`
   width: 90%;
 `
 
@@ -43,7 +42,7 @@ const Botao = styled.button`
 
 const FormPage = () => {
   document.title="Formulário de Inscrição"
-  const {form, changeValue} = useForm({name:'', age:'', trip:'', applicationText:'', profession:'', country: ''})
+  const {form, changeValue, clearForm} = useForm({name:'', age:'', trip:'', applicationText:'', profession:'', country: 'Brasil'})
   const lista = useLista();
 
   const onChangeInput = (event) => {
@@ -63,10 +62,11 @@ const FormPage = () => {
     axios
       .post(`${baseUrl}/trips/${form.trip}/apply`, body)
       .then(response=>{
-        console.log(response.data);
+        alert("Inscrição realizada com sucesso!")
+        clearForm();
       })
       .catch(error=>{
-        console.log(error.response);
+        alert("Erro ao enviar lista, tente novamente")
       })
   }
   
@@ -74,7 +74,6 @@ const FormPage = () => {
     <div>
       <Header />
       <DivConteudo>
-      <DivForm>
         <h2>Formulário de Inscrição</h2>
         <Formulario onSubmit={enviarInscricao}>
           <Legenda for="name">Nome</Legenda>
@@ -83,23 +82,22 @@ const FormPage = () => {
           <Input name="age" value={form.age} onChange={onChangeInput} type="number" required />
           <Legenda for="trip">Viagem</Legenda>
           <select name="trip" value={form.trip} onChange={onChangeInput} required>
-            <option></option>
+            <option>Selecione a viagem</option>
             {lista.map(viagem=>{
               return <option key={viagem.id} value={viagem.id}>{viagem.name}</option>
             })}
           </select>
           <Legenda for="applicationText">Sobre você</Legenda>
-          <textarea name="applicationText" value={form.applicationText} onChange={onChangeInput} required />
+          <TextArea name="applicationText" value={form.applicationText} onChange={onChangeInput} required />
           <Legenda for="profession">Profissão</Legenda>
           <Input name="profession" value={form.profession} onChange={onChangeInput} type="text" required />
           <Legenda for="country">País</Legenda>
           <select name="country" value={form.country} onChange={onChangeInput} required>
-            <option></option>
+            <option value="Brasil">Brasil</option>
             {listaDePaises}
           </select>
           <Botao>Enviar</Botao>
         </Formulario>
-      </DivForm>
       </DivConteudo>
       <Footer />
     </div>

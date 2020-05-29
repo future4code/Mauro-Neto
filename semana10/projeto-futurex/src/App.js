@@ -6,6 +6,7 @@ import FormPage from './components/pages/FormPage';
 import LoginPage from './components/pages/Loginpage';
 import CreateTripsPage from './components/pages/CreateTripsPage';
 import TripDetailsPage from './components/pages/TripDetailsPage';
+import CandidateDetailsPage from './components/pages/CandidateDetailsPage';
 
 
 function App() {
@@ -27,8 +28,11 @@ function App() {
         <Route exact path="/trips/list">
           <ListTripsPage />
         </Route>
-        <Route exact path="/trips/details/:id">
+        <Route exact path="/trips/details/:idviagem">
           <TripDetailsPage />
+        </Route>
+        <Route exact path="/trips/details/:idviagem/:idcandidato">
+          <CandidateDetailsPage />
         </Route>
         <Route path="/">
           <p>404</p>
