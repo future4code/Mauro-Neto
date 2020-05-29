@@ -167,7 +167,7 @@ const TripDetailsPage = () => {
         </>
         }
         {candidatoDetalhes && <>
-          <img src={candidatoDetalhes.foto} />
+          <img src={candidatoDetalhes.foto} alt={candidatoDetalhes.name} />
           <DivCandidatos>
             <p>Nome: {candidatoDetalhes.name}</p>
             <p>Texto de aplicação: {candidatoDetalhes.applicationText}</p>

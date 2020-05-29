@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, Redirect} from "react-router-dom";
 import HomePage from './components/pages/HomePage'
 import ListTripsPage from './components/pages/ListTripsPage'
 import FormPage from './components/pages/FormPage';
@@ -33,6 +33,9 @@ function App() {
         </Route>
         <Route exact path="/trips/details/:idviagem/:idcandidato">
           <CandidateDetailsPage />
+        </Route>
+        <Route exact path="/logout">
+          <Redirect to='/' />
         </Route>
         <Route path="/">
           <p>404</p>

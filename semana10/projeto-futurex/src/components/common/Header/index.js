@@ -39,7 +39,7 @@ const Header = () => {
     const logout = () => {
         localStorage.removeItem("token")
         token=null;
-        history.push("/")
+        history.push("/logout")
     }
 
     return (
