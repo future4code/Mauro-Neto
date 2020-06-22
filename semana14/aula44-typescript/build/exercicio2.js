@@ -12,5 +12,7 @@ function operacoes(num1, num2) {
         console.log("Números iguais");
     }
 }
+operacoes(2, 2);
 operacoes(2, 4);
+operacoes(5, 3);
 //# sourceMappingURL=exercicio2.js.map
