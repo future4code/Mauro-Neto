@@ -37,21 +37,24 @@ function criarEvento(dataInicio, dataFim, nome, descricao) {
     const diaDeHoje = moment();
     if (!dataInicio || !dataFim || !nome || !descricao) {
         console.log("Erro ao criar evento, algum argumento faltando");
+        return;
     }
-    else if (dataInicio.diff(diaDeHoje, "days") < 0) {
+    const diferencaDiaAtual = dataInicio.diff(diaDeHoje, "days");
+    const diferencaHoraInicio = dataFim.diff(dataInicio, "minutes");
+    if (diferencaDiaAtual < 0) {
         console.log("Data do evento não pode ser antes do dia atual");
+        return;
     }
-    else if (dataFim.diff(dataInicio, "minutes") < 0) {
-        console.log("Horário de início não pode ser menor que o horário fim");
+    else if (diferencaHoraInicio < 0) {
+        console.log("Horário de início não pode ser antes que o horário do fim");
+        return;
     }
-    else {
-        arrayEventos.push({
-            nome,
-            descricao,
-            dataInicio,
-            dataFim
-        });
-    }
+    arrayEventos.push({
+        nome,
+        descricao,
+        dataInicio,
+        dataFim
+    });
     console.log(arrayEventos);
 }
 criarEvento(moment(process.argv[2], "DD/MM/YYYY HH:mm"), moment(process.argv[3], "DD/MM/YYYY HH:mm"), process.argv[3], process.argv[4]);
