@@ -29,11 +29,12 @@ const pegarAssinantes = () => __awaiter(void 0, void 0, void 0, function* () {
 const criarNoticia = (titulo, conteudo, data) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = {
-            titulo,
-            conteudo,
-            data
+            title: titulo,
+            content: conteudo,
+            date: data
         };
-        yield axios_1.default.put(`${baseUrl}/news`, { body });
+        yield axios_1.default.put(`${baseUrl}/news`, body);
+        console.log("Notícia criada com sucesso");
     }
     catch (error) {
         console.log(error);
@@ -49,19 +50,52 @@ const enviarNotificacoes = (assinantes, mensagem) => __awaiter(void 0, void 0, v
             }));
         }
         yield Promise.all(arrayDePromises);
-        console.log(arrayDePromises);
         console.log("Todas as notificações enviadas");
     }
     catch (error) {
         console.log(error);
     }
 });
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const assinantes = yield pegarAssinantes();
-        console.log(assinantes);
-        yield enviarNotificacoes(assinantes, "Notificando usuários");
-    });
-}
+const criarAssinante = (nome, email) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const body = {
+            name: nome,
+            email
+        };
+        yield axios_1.default.put(`${baseUrl}/subscribers`, body);
+        console.log("Assinante criado com sucesso");
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+const criarNoticiaENotificar = (titulo, conteudo, data, assinantes, mensagem) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield criarNoticia(titulo, conteudo, data);
+        yield enviarNotificacoes(assinantes, mensagem);
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+const pegarNotificacoes = (assinantes) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const arrayDePromises = [];
+        for (const assinante of assinantes) {
+            arrayDePromises.push(axios_1.default.get(`${baseUrl}/subscribers/${assinante.id}/notifications/all`));
+        }
+        const resposta = yield Promise.all(arrayDePromises);
+        const dados = resposta.map(resp => resp.data);
+        return dados;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+const main = () => __awaiter(void 0, void 0, void 0, function* () {
+    const assinantes = yield pegarAssinantes();
+    console.log(assinantes);
+    yield pegarNotificacoes(assinantes);
+});
 main();
 //# sourceMappingURL=index.js.map

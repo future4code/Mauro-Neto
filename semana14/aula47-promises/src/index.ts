@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosPromise } from 'axios'
 
 const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labenews"
 
@@ -82,7 +82,8 @@ const criarNoticia = async (titulo: string, conteudo:string, data: number): Prom
             content: conteudo,
             date: data
         }
-        await axios.put(`${baseUrl}/news`, {body});
+        await axios.put(`${baseUrl}/news`, body);
+        console.log("Notícia criada com sucesso")
     }
     catch(error){
         console.log(error)
@@ -123,7 +124,7 @@ const criarNoticia = async (titulo: string, conteudo:string, data: number): Prom
 //c
 const enviarNotificacoes = async(assinantes: Assinante[], mensagem: string): Promise<void> =>{
     try{
-        const arrayDePromises: Promise<any>[]=[];
+        const arrayDePromises: Promise<any>[] = [];
         for(const assinante of assinantes){
             arrayDePromises.push(axios.post(`${baseUrl}/notifications/send`, {
                 subscriberId: assinante.id,
@@ -140,14 +141,57 @@ const enviarNotificacoes = async(assinantes: Assinante[], mensagem: string): Pro
 
 //Exercício 7
 //a
-const criarAssinante = async()
+const criarAssinante = async(nome: string, email: string): Promise<void> =>{
+    try{
+        const body = {
+            name: nome,
+            email
+        }
+        await axios.put(`${baseUrl}/subscribers`, body);
+        console.log("Assinante criado com sucesso")
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+const criarNoticiaENotificar = async (titulo: string, conteudo:string, data: number, assinantes: Assinante[], mensagem: string): Promise<void> => {
+    try{
+        await criarNoticia(titulo, conteudo, data);
+        await enviarNotificacoes(assinantes, mensagem);
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+const pegarNotificacoes = async (assinantes: Assinante[]): Promise<any>=>{
+    try{
+        const arrayDePromises: Promise<any>[] = []
+        for(const assinante of assinantes){
+            arrayDePromises.push(axios.get(`${baseUrl}/subscribers/${assinante.id}/notifications/all`))
+        }
+
+        const resposta = await Promise.all(arrayDePromises);
+
+        const dados = resposta.map(resp => resp.data)
+
+        return dados
+    }
+    catch(error){
+        console.log(error);
+    }
+}
 
 
-async function main(): Promise<void>{
+const main = async(): Promise<void> => {
     const assinantes: Assinante[] = await pegarAssinantes()
     console.log(assinantes);
     // await criarNoticia("Essa é uma nova notícia", "Sem conteúdo", Date.now())
-    await enviarNotificacoes(assinantes, "Notificando usuários")
+    // await enviarNotificacoes(assinantes, "Notificando usuários")
+    // await criarAssinante("Mauro", "jmauroneto@gmail.com")
+    //await criarNoticiaENotificar("Essa é uma nova notícia", "Sem conteúdo", Date.now(), assinantes, "Notificando usuários")
+    await pegarNotificacoes(assinantes)
 }
 
 main();
