@@ -78,9 +78,9 @@ const pegarAssinantes = async (): Promise<Assinante[]> =>{
 const criarNoticia = async (titulo: string, conteudo:string, data: number): Promise<void> => {
     try{
         const body = {
-            titulo,
-            conteudo,
-            data
+            title: titulo,
+            content: conteudo,
+            date: data
         }
         await axios.put(`${baseUrl}/news`, {body});
     }
@@ -140,6 +140,7 @@ const enviarNotificacoes = async(assinantes: Assinante[], mensagem: string): Pro
 
 //Exercício 7
 //a
+const criarAssinante = async()
 
 
 async function main(): Promise<void>{
