@@ -34,10 +34,9 @@ const criarConta = (contas: Conta[], nome: string, cpf:string, nascimento: momen
     }
 
     const diaDeHoje = moment();
-    const diferencaDataEHoje = diaDeHoje.diff(nascimento, "years");
-    console.log(diferencaDataEHoje);
+    const idade = diaDeHoje.diff(nascimento, "years");
     
-    if(diferencaDataEHoje<18){
+    if(idade<18){
         console.log("Menores de 18 anos não podem abrir contas");
         return;
     }
