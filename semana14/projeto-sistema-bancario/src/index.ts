@@ -57,7 +57,10 @@ const criarConta = (contas: Conta[], nome: string, cpf:string, nascimento: momen
 
 const verificarSaldo = (contas: Conta[], nome: string, cpf: string): void =>{
     const conta:Conta = contas.find(conta=>conta.cpf===cpf && conta.nome===nome);
-
+    if(!conta){
+        console.log("Conta não encontrada para esse nome e cpf")
+        return;
+    }
     console.log("Saldo: ",conta.saldo);
 }
 
@@ -136,17 +139,28 @@ const transferencia = (contas: Conta[], nome: string, cpf: string, nomeDestino: 
     console.log("Transferência realizada com sucesso!")
 }
 
+const verificarExtrato = (contas: Conta[], nome: string, cpf: string): void => {
+    const conta:Conta = contas.find(conta=>conta.cpf===cpf && conta.nome===nome);
+    if(!conta){
+        console.log("Conta não encontrada para esse nome e cpf")
+        return;
+    }
+    console.log("Extrato: ",conta.extrato);
+}
+
 const main = () => {
     const contas = pegarContas();
     //criarConta(contas, "teste", "05434412569", moment("05/11/2001", "DD/MM/YYYY"));
 
-    //verificarSaldo(contas, "teste", "05434412569");
+    verificarSaldo(contas, "teste", "05434412569");
     
     //adicionarSaldo(contas, "teste", "05434412569", 300)
 
     //pagarConta(contas, "teste", "05434412569", 25, "uma conta qualquer", moment("26/06/2020", "DD/MM/YY"));
 
-    transferencia(contas, "teste", "05434412569", "teste", "71650703777", 25)
+    //transferencia(contas, "teste", "05434412569", "teste", "71650703777", 25)
+
+    //verificarExtrato(contas, "teste", "05434412569");
 }
 
 main();
