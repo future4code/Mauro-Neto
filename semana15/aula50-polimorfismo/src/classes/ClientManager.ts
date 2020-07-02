@@ -36,4 +36,10 @@ export class ClientManager{
             this.clients.splice(clientToDelete, 1);
         }
     }
+
+    public printClients(): void{
+        for(const client of this.clients){
+            console.log(`${client.name} - ${client.registrationNumber} - ${client.consumedEnergy} - ${client.calculateBill()}`)
+        }
+    }
 }

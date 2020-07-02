@@ -89,3 +89,5 @@ const clienteIndustrial = new IndustrialClient("Uma indústria qualquer", 4, 130
 gerenciador.registerClient(clienteIndustrial);
 
 console.log(gerenciador.getClientsQuantity())
+
+gerenciador.printClients();

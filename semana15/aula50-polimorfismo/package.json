@@ -9,6 +9,7 @@
   "author": "Mauro Neto",
   "license": "ISC",
   "dependencies": {
+    "@brazilian-utils/brazilian-utils": "^1.0.0-rc.8",
     "@types/axios": "^0.14.0",
     "@types/node": "^14.0.13",
     "axios": "^0.19.2",
