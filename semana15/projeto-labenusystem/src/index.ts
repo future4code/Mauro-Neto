@@ -32,7 +32,7 @@ const aluno1 = new Student(
     "3",
     "Aluno 1",
     "aluno1@lbn.com",
-    moment(),
+    moment("22/04/1998", "DD/MM/YYYY"),
     ["Coding", "Studies", "Watch movies"]
 )
 
@@ -40,7 +40,7 @@ const aluno2 = new Student(
     "4",
     "Aluno 2",
     "aluno2@lbn.com",
-    moment(),
+    moment("05/11/1996", "DD/MM/YYYY"),
     ["Reading", "Play RPG"]
 )
 
@@ -64,12 +64,32 @@ const turma2 = new NightMission(
     undefined
 )
 
+const getStudentBirthDateById = (id: string): moment.Moment => {
+    const dados:any = studentsFileManager.readFile().map((aluno: any) =>{
+        return new Student(
+            aluno.id,
+            aluno.name,
+            aluno.email,
+            aluno.birthDate,
+            aluno.hobbies
+        )
+    })
+    const alunoEncontrado = dados.find((aluno: Student) => {
+        return aluno.id === id;
+    })
+
+    return alunoEncontrado.birthDate;
+}
+
 turma1.setName("julian");
 turma1.addStudent(aluno1)
 turma1.addStudent(aluno2);
 turma1.addDocent(prof1);
 
 turma2.setName("tesla-na-night");
-console.log(turma2.getName())
 
 missionFileManager.writeFile([turma1, turma2])
+
+
+console.log(getStudentBirthDateById("3"))
+console.log(getStudentBirthDateById("4"))

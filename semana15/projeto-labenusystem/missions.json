@@ -8,7 +8,7 @@
         "id": "1",
         "name": "Professor 1",
         "email": "prof1@lbn.com",
-        "birthDate": "2020-07-03T19:24:15.845Z",
+        "birthDate": "2020-07-03T19:34:43.445Z",
         "skills": [
           "Backend",
           "CSS",
@@ -25,7 +25,7 @@
         "id": "3",
         "name": "Aluno 1",
         "email": "aluno1@lbn.com",
-        "birthDate": "2020-07-03T19:24:15.848Z",
+        "birthDate": "1998-04-22T03:00:00.000Z",
         "hobbies": [
           "Coding",
           "Studies",
@@ -36,7 +36,7 @@
         "id": "4",
         "name": "Aluno 2",
         "email": "aluno2@lbn.com",
-        "birthDate": "2020-07-03T19:24:15.848Z",
+        "birthDate": "1996-11-05T03:00:00.000Z",
         "hobbies": [
           "Reading",
           "Play RPG"
