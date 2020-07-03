@@ -1,0 +1,23 @@
+[
+  {
+    "id": "3",
+    "name": "Aluno 1",
+    "email": "aluno1@lbn.com",
+    "birthDate": "2020-07-03T19:24:15.848Z",
+    "hobbies": [
+      "Coding",
+      "Studies",
+      "Watch movies"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Aluno 2",
+    "email": "aluno2@lbn.com",
+    "birthDate": "2020-07-03T19:24:15.848Z",
+    "hobbies": [
+      "Reading",
+      "Play RPG"
+    ]
+  }
+]
