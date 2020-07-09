@@ -90,6 +90,8 @@ const getSalaryAverageByGender = async(gender: string): Promise<any> => {
 
         console.log(response[0])
 
+        return response[0]
+
     } catch (error) {
         console.log(error);
     }
@@ -139,6 +141,44 @@ app.post("/movie", async(req: Request, res: Response)=>{
     try {
         await createMovie(req.body.id, req.body.name, req.body.synopsis, new Date(req.body.release_Date), req.body.rating, new Date(req.body.playing_limit_date))
         res.status(201).send({message: "Movie created"})
+    } catch (error) {
+        res.status(400).send({message: error.message})
+    }
+})
+
+const getAllMovies = async(): Promise<any> =>{
+    try{
+        const result = await connection("Movie").select("*").limit(15);
+        return result;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+app.get("/movie/all", async(req: Request, res: Response)=>{
+    try{
+        const movies = await getAllMovies()
+        res.status(200).send({movies})
+    }
+    catch(error){
+        res.status(400).send({message: error.message})
+    }
+})
+
+const searchMovie = async(searchQuery: string): Promise<any> => {
+    try {
+        const result = await connection("Movie").select("*").where("name", "=", searchQuery).orWhere("synopsis", "=", searchQuery)
+        return result;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+app.get("/movie/search", async(req: Request, res: Response)=>{
+    try {
+        const searchResult = await searchMovie(req.query.query as string);
+        res.status(200).send({searchResult});
     } catch (error) {
         res.status(400).send({message: error.message})
     }

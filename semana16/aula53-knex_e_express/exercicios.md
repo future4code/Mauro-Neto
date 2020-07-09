@@ -131,3 +131,28 @@ Criando endpoint
     }
 })
 ```
+
+### Exercício 6
+Função para pegar todos os filmes (limitado a 15 resultados)
+```const getAllMovies = async(): Promise<any> =>{
+    try{
+        const result = await connection("Movie").select("*").limit(15);
+        return result;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+```
+
+Endpoint que chama a função
+```app.get("/movie/all", async(req: Request, res: Response)=>{
+    try{
+        const movies = await getAllMovies()
+        res.status(200).send({movies})
+    }
+    catch(error){
+        res.status(400).send({message: error.message})
+    }
+})
+```
