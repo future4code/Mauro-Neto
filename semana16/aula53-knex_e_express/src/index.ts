@@ -1,6 +1,8 @@
 import knex from 'knex'
 import dotenv from 'dotenv'
-import express from 'express'
+import express, { Request, Response } from "express";
+import { AddressInfo } from "net";
+import { create } from 'domain';
 
 dotenv.config()
 
@@ -14,6 +16,19 @@ const connection = knex({
         database: process.env.DB_SCHEMA
     },
 });
+
+const app = express();
+
+app.use(express.json())
+
+const server = app.listen(3000, ()=>{
+    if (server) {
+        const address = server.address() as AddressInfo;
+        console.log(`Server is running in http://localhost:${address.port}`);
+    } else {
+        console.error(`Failure upon starting server.`);
+    }
+})
 
 
 const searchActor = async (name: string): Promise<any> => {
@@ -80,4 +95,51 @@ const getSalaryAverageByGender = async(gender: string): Promise<any> => {
     }
 }
 
-getSalaryAverageByGender("male")
+// getSalaryAverageByGender("male");
+
+app.get("/actor", async(req: Request, res: Response)=>{
+    try{
+        const count = await countByGender(req.query.gender as string)
+        res.status(200).send(count);
+    }
+    catch(error){
+        res.status(400).send({message: error.message});
+    }
+})
+
+app.post("/actor", async(req: Request, res: Response)=>{
+    try {
+        await updateSalaryById(req.body.id, req.body.salary);
+        res.status(200).send({message: "Success"})
+    } catch (error) {
+        res.status(400).send({message: error.message});
+    }
+})
+
+app.delete("/actor/:id", async(req: Request, res: Response)=>{
+    try {
+        await deleteActorById(req.params.id);
+        res.status(200).send({message: `Actor with id ${req.params.id} deleted`})
+    } catch (error) {
+        res.status(400).send({message: error.message})
+    }
+})
+
+const createMovie = async(id: string, name: string, synopsis: string, release_Date: Date, rating: number, playing_limit_date: Date): Promise<void> =>{
+    try{
+        await connection.insert({id, name, synopsis, release_Date, rating, playing_limit_date}).into("Movie");
+        console.log("Filme criado");
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+app.post("/movie", async(req: Request, res: Response)=>{
+    try {
+        await createMovie(req.body.id, req.body.name, req.body.synopsis, new Date(req.body.release_Date), req.body.rating, new Date(req.body.playing_limit_date))
+        res.status(201).send({message: "Movie created"})
+    } catch (error) {
+        res.status(400).send({message: error.message})
+    }
+})
