@@ -38,7 +38,7 @@ const createUser = async(name: string, nickname: string, email: string): Promise
         console.log("Usuário criado com sucesso")
     }
     catch(error){
-        console.log(error)
+        throw new Error(error.sqlMessage);
     }
 }
 
@@ -47,7 +47,7 @@ const getUserById = async(id: number): Promise<any> => {
         const user = await connection.select("*").from("TodoListUser").where("id", "=", id);
         return user[0];
     } catch (error) {
-        console.log(error)
+        throw new Error(error.sqlMessage);
     }   
 }
 
@@ -66,16 +66,16 @@ const editUser = async(id: number, name?: string, nickname?: string): Promise<an
             return {name, nickname}
         }
     } catch (error) {
-        console.log(error)
+        throw new Error(error.sqlMessage);
     }
 }
 
-const createTask = async(title: string, description: string, limitDate: Date, creatorUserId: number): Promise<void>=>{
+const createTask = async(title: string, description: string, limitDate: string, creatorUserId: number): Promise<void>=>{
     try {
         await connection.insert({title, description, limit_date: limitDate, creator_user_id: creatorUserId}).into("TodoListTask");
         console.log("Tarefa criada")
     } catch (error) {
-        console.log(error)
+        throw new Error(error.sqlMessage);
     }
 }
 
@@ -93,7 +93,7 @@ const getTaskById = async(id: number): Promise<any> => {
         }
         return formattedObject;
     } catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
     }
 }
 
@@ -103,7 +103,7 @@ const getAllUsers = async(): Promise<any> => {
         return users;
     }
     catch(error){
-        console.log(error);
+        throw new Error(error.sqlMessage);
     }
 }
 
@@ -123,77 +123,130 @@ const getAllTasksByUserId = async(id: number):Promise<any> => {
         })
         return formattedTasks;
     } catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
+    }
+}
+
+const searchUser = async(query: string):Promise<any>=>{
+    try {
+        const users = await connection.select("id", "nickname").from("TodoListUser").where("nickname", "like", `%${query}%`).orWhere("email", "like", `${query}`);
+        return users;
+    } catch (error) {
+        throw new Error(error.sqlMessage);
     }
 }
 
 app.get("/user/all", async(req: Request, res: Response)=>{
     try {
         const users = await getAllUsers();
-        res.status(200).send(users);
+        return res.status(200).send(users);
     } catch (error) {
-        res.status(400).send({message: error.message});
+        return res.status(400).send({message: error.message});
     }
 })
 
 app.get("/user/:id", async(req: Request, res: Response) => {
     try {
+        if(!req.params.id){
+            return res.status(400).send({message: "Please send an id to get an user"});
+        }
         const user = await getUserById(Number(req.params.id));
-        res.status(200).send(user);
+        if(user){
+            return res.status(200).send(user);
+        }
+        return res.status(400).send({message: `Can't find user with id ${req.params.id}`});
     } catch (error) {
-        res.status(400).send({message: error.message});
+        return res.status(400).send({message: error.message});
     }
 })
 
-app.post("/user", async(req: Request, res: Response)=>{
+app.put("/user", async(req: Request, res: Response)=>{
     try {
-        await createUser(req.body.name, req.body.name, req.body.email)
-        res.status(201).send({message: "User Created"})
+        if(!req.body.name || !req.body.nickname || !req.body.email){
+            return res.status(400).send({message: "Missing parameters, please fill all the fields"})
+        }
+        await createUser(req.body.name, req.body.nickname, req.body.email)
+        return res.status(201).send({message: "User Created"})
     } catch (error) {
-        res.status(400).send({message: error.message})
+        return res.status(400).send({message: error.message})
+    }
+})
+
+app.get("/user", async(req: Request, res: Response)=>{
+    try {
+        if(!req.query.query){
+            return res.status(400).send({message: "Missing query for search"})
+        }
+        const users = await searchUser(req.query.query as string);
+        if(users.length>0){
+            return res.status(200).send({users});
+        }
+        return res.status(200).send([]);
+    } catch (error) {
+        return res.status(400).send({message: error.message});
     }
 })
 
 app.post("/user/:id", async(req: Request, res: Response)=>{
     try {
-        console.log(req.body)
-        if(req.body.name && !req.body.nickname){
-            res.status(200).send(await editUser(Number(req.params.id), req.body.name))
+        if(!req.params.id){
+            return res.status(400).send({message: "Please send an id to edit an user"});
         }
-        else if(!req.body.name && req.body.nickname){
-            res.status(200).send(await editUser(Number(req.params.id), null,req.body.nickname))
+        if(req.body.name && !req.body.nickname && req.body.nickname!==""){
+            return res.status(200).send(await editUser(Number(req.params.id), req.body.name))
         }
-        else if(req.body.name && req.body.nickname){
-            res.status(200).send(await editUser(Number(req.params.id), req.body.name, req.body.nickname))
+        else if(!req.body.name && req.body.name!=="" && req.body.nickname){
+            return res.status(200).send(await editUser(Number(req.params.id), null,req.body.nickname))
+        }
+        else if(req.body.name && req.body.name!=="" && req.body.nickname && req.body.nickname !==""){
+            return res.status(200).send(await editUser(Number(req.params.id), req.body.name, req.body.nickname))
+        }
+        else if(req.body.name==="" || req.body.nickname===""){
+            return res.status(400).send({message: "You can't send an empty value"});
         }
     } catch (error) {
-        res.status(400).send({message: error.message})
+        return res.status(400).send({message: error.message})
     }
 })
 
 app.get("/task", async(req: Request, res: Response)=>{
     try {
+        if(!req.query.creatorUserId){
+            return res.status(400).send({message: "Please send an id to get user's tasks"});
+        }
         const tasks = await getAllTasksByUserId(Number(req.query.creatorUserId))
-        res.status(200).send({tasks})
+        if(tasks.length>0){
+            return res.status(200).send({tasks})
+        }
+        return res.status(200).send([]);
     } catch (error) {
-        res.status(400).send({message: error.message});
+        return res.status(400).send({message: error.message});
     }
 })
 
 app.get("/task/:id", async(req: Request, res: Response) => {
     try {
+        if(!req.params.id){
+            return res.status(400).send({message: "Please send an id to get a task"});
+        }
         const task = await getTaskById(Number(req.params.id));
-        res.status(200).send(task);
+        if(task){
+            return res.status(200).send(task);
+        }
+        return res.status(400).send({message: `Can't find task with id ${req.params.id}`});
     } catch (error) {
-        res.status(400).send({message: error.message});
+        return res.status(400).send({message: error.message});
     }
 })
 
 app.put("/task", async(req:Request, res: Response)=>{
     try {
-        await createTask(req.body.title, req.body.description, new Date(req.body.limitDate), Number(req.body.creatorUserId))
-        res.status(201).send({message: "Tarefa criada"});
+        if(!req.body.title || !req.body.description || !req.body.limitDate || !req.body.creatorUserId){
+            return res.status(400).send({message: "Missing parameters, please fill all the fields"})
+        }
+        await createTask(req.body.title, req.body.description, moment(req.body.limitDate, "DD/MM/YYYY").format("YYYY-MM-DD"), Number(req.body.creatorUserId))
+        return res.status(201).send({message: "Tarefa criada"});
     } catch (error) {
-        res.status(400).send({message: error.message});
+        return res.status(400).send({message: error.message});
     }
 })

@@ -44,7 +44,7 @@ const createUser = (name, nickname, email) => __awaiter(void 0, void 0, void 0, 
         console.log("Usuário criado com sucesso");
     }
     catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
     }
 });
 const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -53,7 +53,7 @@ const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
         return user[0];
     }
     catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
     }
 });
 const editUser = (id, name, nickname) => __awaiter(void 0, void 0, void 0, function* () {
@@ -72,7 +72,7 @@ const editUser = (id, name, nickname) => __awaiter(void 0, void 0, void 0, funct
         }
     }
     catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
     }
 });
 const createTask = (title, description, limitDate, creatorUserId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -81,7 +81,7 @@ const createTask = (title, description, limitDate, creatorUserId) => __awaiter(v
         console.log("Tarefa criada");
     }
     catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
     }
 });
 const getTaskById = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -99,7 +99,7 @@ const getTaskById = (id) => __awaiter(void 0, void 0, void 0, function* () {
         return formattedObject;
     }
     catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
     }
 });
 const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -108,7 +108,7 @@ const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
         return users;
     }
     catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
     }
 });
 const getAllTasksByUserId = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -128,78 +128,131 @@ const getAllTasksByUserId = (id) => __awaiter(void 0, void 0, void 0, function* 
         return formattedTasks;
     }
     catch (error) {
-        console.log(error);
+        throw new Error(error.sqlMessage);
+    }
+});
+const searchUser = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield connection.select("id", "nickname").from("TodoListUser").where("nickname", "like", `%${query}%`).orWhere("email", "like", `${query}`);
+        return users;
+    }
+    catch (error) {
+        throw new Error(error.sqlMessage);
     }
 });
 app.get("/user/all", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield getAllUsers();
-        res.status(200).send(users);
+        return res.status(200).send(users);
     }
     catch (error) {
-        res.status(400).send({ message: error.message });
+        return res.status(400).send({ message: error.message });
     }
 }));
 app.get("/user/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.params.id) {
+            return res.status(400).send({ message: "Please send an id to get an user" });
+        }
         const user = yield getUserById(Number(req.params.id));
-        res.status(200).send(user);
+        if (user) {
+            return res.status(200).send(user);
+        }
+        return res.status(400).send({ message: `Can't find user with id ${req.params.id}` });
     }
     catch (error) {
-        res.status(400).send({ message: error.message });
+        return res.status(400).send({ message: error.message });
     }
 }));
-app.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.put("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield createUser(req.body.name, req.body.name, req.body.email);
-        res.status(201).send({ message: "User Created" });
+        if (!req.body.name || !req.body.nickname || !req.body.email) {
+            return res.status(400).send({ message: "Missing parameters, please fill all the fields" });
+        }
+        yield createUser(req.body.name, req.body.nickname, req.body.email);
+        return res.status(201).send({ message: "User Created" });
     }
     catch (error) {
-        res.status(400).send({ message: error.message });
+        return res.status(400).send({ message: error.message });
+    }
+}));
+app.get("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (!req.query.query) {
+            return res.status(400).send({ message: "Missing query for search" });
+        }
+        const users = yield searchUser(req.query.query);
+        if (users.length > 0) {
+            return res.status(200).send({ users });
+        }
+        return res.status(200).send([]);
+    }
+    catch (error) {
+        return res.status(400).send({ message: error.message });
     }
 }));
 app.post("/user/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(req.body);
-        if (req.body.name && !req.body.nickname) {
-            res.status(200).send(yield editUser(Number(req.params.id), req.body.name));
+        if (!req.params.id) {
+            return res.status(400).send({ message: "Please send an id to edit an user" });
         }
-        else if (!req.body.name && req.body.nickname) {
-            res.status(200).send(yield editUser(Number(req.params.id), null, req.body.nickname));
+        if (req.body.name && !req.body.nickname && req.body.nickname !== "") {
+            return res.status(200).send(yield editUser(Number(req.params.id), req.body.name));
         }
-        else if (req.body.name && req.body.nickname) {
-            res.status(200).send(yield editUser(Number(req.params.id), req.body.name, req.body.nickname));
+        else if (!req.body.name && req.body.name !== "" && req.body.nickname) {
+            return res.status(200).send(yield editUser(Number(req.params.id), null, req.body.nickname));
+        }
+        else if (req.body.name && req.body.name !== "" && req.body.nickname && req.body.nickname !== "") {
+            return res.status(200).send(yield editUser(Number(req.params.id), req.body.name, req.body.nickname));
+        }
+        else if (req.body.name === "" || req.body.nickname === "") {
+            return res.status(400).send({ message: "You can't send an empty value" });
         }
     }
     catch (error) {
-        res.status(400).send({ message: error.message });
+        return res.status(400).send({ message: error.message });
     }
 }));
 app.get("/task", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.query.creatorUserId) {
+            return res.status(400).send({ message: "Please send an id to get user's tasks" });
+        }
         const tasks = yield getAllTasksByUserId(Number(req.query.creatorUserId));
-        res.status(200).send({ tasks });
+        if (tasks.length > 0) {
+            return res.status(200).send({ tasks });
+        }
+        return res.status(200).send([]);
     }
     catch (error) {
-        res.status(400).send({ message: error.message });
+        return res.status(400).send({ message: error.message });
     }
 }));
 app.get("/task/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.params.id) {
+            return res.status(400).send({ message: "Please send an id to get a task" });
+        }
         const task = yield getTaskById(Number(req.params.id));
-        res.status(200).send(task);
+        if (task) {
+            return res.status(200).send(task);
+        }
+        return res.status(400).send({ message: `Can't find task with id ${req.params.id}` });
     }
     catch (error) {
-        res.status(400).send({ message: error.message });
+        return res.status(400).send({ message: error.message });
     }
 }));
 app.put("/task", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield createTask(req.body.title, req.body.description, new Date(req.body.limitDate), Number(req.body.creatorUserId));
-        res.status(201).send({ message: "Tarefa criada" });
+        if (!req.body.title || !req.body.description || !req.body.limitDate || !req.body.creatorUserId) {
+            return res.status(400).send({ message: "Missing parameters, please fill all the fields" });
+        }
+        yield createTask(req.body.title, req.body.description, moment_1.default(req.body.limitDate, "DD/MM/YYYY").format("YYYY-MM-DD"), Number(req.body.creatorUserId));
+        return res.status(201).send({ message: "Tarefa criada" });
     }
     catch (error) {
-        res.status(400).send({ message: error.message });
+        return res.status(400).send({ message: error.message });
     }
 }));
 //# sourceMappingURL=index.js.map
