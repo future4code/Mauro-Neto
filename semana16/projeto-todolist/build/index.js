@@ -47,15 +47,6 @@ const createUser = (name, nickname, email) => __awaiter(void 0, void 0, void 0, 
         console.log(error);
     }
 });
-app.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield createUser(req.body.name, req.body.name, req.body.email);
-        res.status(201).send({ message: "User Created" });
-    }
-    catch (error) {
-        res.status(400).send({ message: error.message });
-    }
-}));
 const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield connection.select("*").from("TodoListUser").where("id", "=", id);
@@ -65,15 +56,25 @@ const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(error);
     }
 });
-app.get("/user/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const editUser = (id, name, nickname) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield getUserById(Number(req.params.id));
-        res.status(200).send(user);
+        if (name && !nickname) {
+            yield connection("TodoListUser").update({ name }).where("id", "=", id);
+            return { name };
+        }
+        else if (!name && nickname) {
+            yield connection("TodoListUser").update({ nickname }).where("id", "=", id);
+            return { nickname };
+        }
+        else if (name && nickname) {
+            yield connection("TodoListUser").update({ name, nickname }).where("id", "=", id);
+            return { name, nickname };
+        }
     }
     catch (error) {
-        res.status(400).send({ message: error.message });
+        console.log(error);
     }
-}));
+});
 const createTask = (title, description, limitDate, creatorUserId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield connection.insert({ title, description, limit_date: limitDate, creator_user_id: creatorUserId }).into("TodoListTask");
@@ -83,19 +84,9 @@ const createTask = (title, description, limitDate, creatorUserId) => __awaiter(v
         console.log(error);
     }
 });
-app.put("/task", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield createTask(req.body.title, req.body.description, new Date(req.body.limitDate), Number(req.body.creatorUserId));
-        res.status(201).send({ message: "Tarefa criada" });
-    }
-    catch (error) {
-        res.status(400).send({ message: error.message });
-    }
-}));
 const getTaskById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const task = yield connection.select("TodoListTask.*", "TodoListUser.nickname").from("TodoListTask").where("TodoListTask.id", "=", id).join("TodoListUser", "TodoListUser.id", "=", "TodoListTask.creator_user_id");
-        console.log(task[0].limit_date);
         const formattedObject = {
             taskId: task[0].id,
             title: task[0].title,
@@ -111,10 +102,101 @@ const getTaskById = (id) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(error);
     }
 });
+const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield connection.select("*").from("TodoListUser");
+        return users;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+const getAllTasksByUserId = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const tasks = yield connection.select("TodoListTask.*", "TodoListUser.nickname").from("TodoListTask").where("creator_user_id", "=", id).join("TodoListUser", "TodoListUser.id", "=", "TodoListTask.creator_user_id");
+        const formattedTasks = tasks.map(task => {
+            return {
+                taskId: task.id,
+                title: task.title,
+                description: task.description,
+                limitDate: moment_1.default(task.limit_date).format("DD/MM/YYYY"),
+                creatorUserId: task.creator_user_id,
+                status: task.status,
+                creatorUserNickname: task.nickname
+            };
+        });
+        return formattedTasks;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+app.get("/user/all", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield getAllUsers();
+        res.status(200).send(users);
+    }
+    catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}));
+app.get("/user/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield getUserById(Number(req.params.id));
+        res.status(200).send(user);
+    }
+    catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}));
+app.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield createUser(req.body.name, req.body.name, req.body.email);
+        res.status(201).send({ message: "User Created" });
+    }
+    catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}));
+app.post("/user/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log(req.body);
+        if (req.body.name && !req.body.nickname) {
+            res.status(200).send(yield editUser(Number(req.params.id), req.body.name));
+        }
+        else if (!req.body.name && req.body.nickname) {
+            res.status(200).send(yield editUser(Number(req.params.id), null, req.body.nickname));
+        }
+        else if (req.body.name && req.body.nickname) {
+            res.status(200).send(yield editUser(Number(req.params.id), req.body.name, req.body.nickname));
+        }
+    }
+    catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}));
+app.get("/task", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const tasks = yield getAllTasksByUserId(Number(req.query.creatorUserId));
+        res.status(200).send({ tasks });
+    }
+    catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}));
 app.get("/task/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const task = yield getTaskById(Number(req.params.id));
         res.status(200).send(task);
+    }
+    catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}));
+app.put("/task", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield createTask(req.body.title, req.body.description, new Date(req.body.limitDate), Number(req.body.creatorUserId));
+        res.status(201).send({ message: "Tarefa criada" });
     }
     catch (error) {
         res.status(400).send({ message: error.message });
