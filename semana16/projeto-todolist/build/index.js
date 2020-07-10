@@ -87,6 +87,7 @@ const createTask = (title, description, limitDate, creatorUserId) => __awaiter(v
 const getTaskById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const task = yield connection.select("TodoListTask.*", "TodoListUser.nickname").from("TodoListTask").where("TodoListTask.id", "=", id).join("TodoListUser", "TodoListUser.id", "=", "TodoListTask.creator_user_id");
+        const responsibleUsers = yield connection.select("TodoListUser.id", "TodoListUser.nickname").where("TodoListResponsibleUserTaskRelation.task_id", "=", id).from("TodoListUser").join("TodoListResponsibleUserTaskRelation", "TodoListUser.id", "=", "TodoListResponsibleUserTaskRelation.responsible_user_id");
         const formattedObject = {
             taskId: task[0].id,
             title: task[0].title,
@@ -94,7 +95,8 @@ const getTaskById = (id) => __awaiter(void 0, void 0, void 0, function* () {
             limitDate: moment_1.default(task[0].limit_date).format("DD/MM/YYYY"),
             status: task[0].status,
             creatorUserId: task[0].creator_user_id,
-            creatorUserNickname: task[0].nickname
+            creatorUserNickname: task[0].nickname,
+            responsibleUsers
         };
         return formattedObject;
     }
@@ -151,7 +153,6 @@ const assignTaskToUser = (task_id, responsible_user_id) => __awaiter(void 0, voi
 const getResponsibleUsersForTask = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield connection.select("TodoListUser.id", "TodoListUser.nickname").where("TodoListResponsibleUserTaskRelation.task_id", "=", id).from("TodoListUser").join("TodoListResponsibleUserTaskRelation", "TodoListUser.id", "=", "TodoListResponsibleUserTaskRelation.responsible_user_id");
-        console.log(users);
         return users;
     }
     catch (error) {

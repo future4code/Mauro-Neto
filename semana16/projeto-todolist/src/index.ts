@@ -82,6 +82,7 @@ const createTask = async(title: string, description: string, limitDate: string, 
 const getTaskById = async(id: number): Promise<any> => {
     try {
         const task = await connection.select("TodoListTask.*", "TodoListUser.nickname").from("TodoListTask").where("TodoListTask.id", "=", id).join("TodoListUser", "TodoListUser.id", "=", "TodoListTask.creator_user_id");
+        const responsibleUsers = await connection.select("TodoListUser.id", "TodoListUser.nickname").where("TodoListResponsibleUserTaskRelation.task_id", "=", id).from("TodoListUser").join("TodoListResponsibleUserTaskRelation", "TodoListUser.id", "=", "TodoListResponsibleUserTaskRelation.responsible_user_id")
         const formattedObject = {
             taskId: task[0].id,
             title: task[0].title,
@@ -89,7 +90,8 @@ const getTaskById = async(id: number): Promise<any> => {
             limitDate: moment(task[0].limit_date).format("DD/MM/YYYY"),
             status: task[0].status,
             creatorUserId: task[0].creator_user_id,
-            creatorUserNickname: task[0].nickname
+            creatorUserNickname: task[0].nickname,
+            responsibleUsers
         }
         return formattedObject;
     } catch (error) {
