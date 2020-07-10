@@ -140,6 +140,24 @@ const searchUser = (query) => __awaiter(void 0, void 0, void 0, function* () {
         throw new Error(error.sqlMessage);
     }
 });
+const assignTaskToUser = (task_id, responsible_user_id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield connection.insert(({ task_id, responsible_user_id })).into("TodoListResponsibleUserTaskRelation");
+    }
+    catch (error) {
+        throw new Error(error.sqlMessage);
+    }
+});
+const getResponsibleUsersForTask = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield connection.select("TodoListUser.id", "TodoListUser.nickname").where("TodoListResponsibleUserTaskRelation.task_id", "=", id).from("TodoListUser").join("TodoListResponsibleUserTaskRelation", "TodoListUser.id", "=", "TodoListResponsibleUserTaskRelation.responsible_user_id");
+        console.log(users);
+        return users;
+    }
+    catch (error) {
+        throw new Error(error.sqlMessage);
+    }
+});
 app.get("/user/all", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield getAllUsers();
@@ -243,16 +261,43 @@ app.get("/task/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.status(400).send({ message: error.message });
     }
 }));
+app.get("/task/:id/responsible", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (!req.params.id) {
+            return res.status(400).send({ message: "Please send an id to get the responsible users for a task" });
+        }
+        const users = yield getResponsibleUsersForTask(Number(req.params.id));
+        if (users.length > 0) {
+            return res.status(200).send(users);
+        }
+        return res.status(400).send({ message: "Can't find responsible users for task" });
+    }
+    catch (error) {
+        return res.status(400).send({ message: error.message });
+    }
+}));
 app.put("/task", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!req.body.title || !req.body.description || !req.body.limitDate || !req.body.creatorUserId) {
             return res.status(400).send({ message: "Missing parameters, please fill all the fields" });
         }
         yield createTask(req.body.title, req.body.description, moment_1.default(req.body.limitDate, "DD/MM/YYYY").format("YYYY-MM-DD"), Number(req.body.creatorUserId));
-        return res.status(201).send({ message: "Tarefa criada" });
+        return res.status(201).send({ message: "Task created" });
     }
     catch (error) {
         return res.status(400).send({ message: error.message });
+    }
+}));
+app.post("/task/responsible", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (!req.body.task_id || !req.body.responsible_user_id) {
+            res.status(400).send({ message: "Missing parameters, please fill all the fields" });
+        }
+        yield assignTaskToUser(req.body.task_id, req.body.responsible_user_id);
+        res.status(200).send({ message: "Task assigned successfully" });
+    }
+    catch (error) {
+        res.status(400).send({ message: error.message });
     }
 }));
 //# sourceMappingURL=index.js.map

@@ -136,6 +136,23 @@ const searchUser = async(query: string):Promise<any>=>{
     }
 }
 
+const assignTaskToUser = async(task_id: number, responsible_user_id: number): Promise<void> =>{
+    try {
+        await connection.insert(({task_id, responsible_user_id})).into("TodoListResponsibleUserTaskRelation")
+    } catch (error) {
+        throw new Error(error.sqlMessage);
+    }
+}
+
+const getResponsibleUsersForTask = async(id:number): Promise<any> => {
+    try {
+        const users = await connection.select("TodoListUser.id", "TodoListUser.nickname").where("TodoListResponsibleUserTaskRelation.task_id", "=", id).from("TodoListUser").join("TodoListResponsibleUserTaskRelation", "TodoListUser.id", "=", "TodoListResponsibleUserTaskRelation.responsible_user_id")
+        return users;
+    } catch (error) {
+        throw new Error(error.sqlMessage);
+    }
+}
+
 app.get("/user/all", async(req: Request, res: Response)=>{
     try {
         const users = await getAllUsers();
@@ -239,14 +256,41 @@ app.get("/task/:id", async(req: Request, res: Response) => {
     }
 })
 
-app.put("/task", async(req:Request, res: Response)=>{
+app.get("/task/:id/responsible", async(req: Request, res: Response)=>{
+    try {
+        if(!req.params.id){
+            return res.status(400).send({message: "Please send an id to get the responsible users for a task"});
+        }
+        const users = await getResponsibleUsersForTask(Number(req.params.id))
+        if(users.length>0){
+            return res.status(200).send(users)
+        }
+        return res.status(400).send({message: "Can't find responsible users for task"})
+    } catch (error) {
+        return res.status(400).send({message: error.message});
+    }
+})
+
+app.put("/task", async(req: Request, res: Response)=>{
     try {
         if(!req.body.title || !req.body.description || !req.body.limitDate || !req.body.creatorUserId){
             return res.status(400).send({message: "Missing parameters, please fill all the fields"})
         }
         await createTask(req.body.title, req.body.description, moment(req.body.limitDate, "DD/MM/YYYY").format("YYYY-MM-DD"), Number(req.body.creatorUserId))
-        return res.status(201).send({message: "Tarefa criada"});
+        return res.status(201).send({message: "Task created"});
     } catch (error) {
         return res.status(400).send({message: error.message});
+    }
+})
+
+app.post("/task/responsible", async(req: Request, res: Response) => {
+    try {
+        if(!req.body.task_id || !req.body.responsible_user_id){
+            res.status(400).send({message: "Missing parameters, please fill all the fields"})
+        }
+        await assignTaskToUser(req.body.task_id, req.body.responsible_user_id)
+        res.status(200).send({message: "Task assigned successfully"})
+    } catch (error) {
+        res.status(400).send({message: error.message});
     }
 })
