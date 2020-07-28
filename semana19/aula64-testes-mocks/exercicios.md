@@ -222,3 +222,485 @@ test("defender losing 200 points of life", ()=>{
 ```
 
 **b)**
+```
+test("one character invalid", ()=>{
+        expect.assertions(4);
+
+        const validatorMock = jest.fn(()=> false)
+
+        const attacker: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: -100,
+            defense: 350
+        }
+
+        const defender: Character = {
+            name: "Astrodev ghost",
+            life: 500,
+            strength: 100,
+            defense: 0
+        }
+
+        try {
+            performAttack(attacker, defender, validatorMock)
+        } catch (error) {
+            expect(error.message).toEqual("Invalid character")
+            expect(validatorMock).toHaveBeenCalled();
+            expect(validatorMock).toHaveBeenCalledTimes(1);
+            expect(validatorMock).toHaveReturnedTimes(1);
+        }
+    })
+```
+
+### Exercício 6
+```
+import { Character } from "../src/Exercicio1"
+import { performAttack } from "../src/Exercicio3"
+
+describe("performAttack tests", () => {
+    test("defender with defense greater than attacker strength", () => {
+        const validatorMock = jest.fn(()=> true)
+
+        const attacker: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: 350
+        }
+
+        const defender: Character = {
+            name: "Astrodev ghost",
+            life: 500,
+            strength: 100,
+            defense: 400
+        }
+
+        performAttack(attacker, defender, validatorMock)
+
+        expect(defender.life).toEqual(500)
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(2);
+        expect(validatorMock).toHaveReturnedTimes(2);
+    })
+
+    test("attacker with strength greater than defender life minus defense", () => {
+        const validatorMock = jest.fn(()=> true)
+
+        const attacker: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 1000,
+            defense: 350
+        }
+
+        const defender: Character = {
+            name: "Astrodev ghost",
+            life: 500,
+            strength: 100,
+            defense: 400
+        }
+
+        performAttack(attacker, defender, validatorMock)
+
+        expect(defender.life).toEqual(-100)
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(2);
+        expect(validatorMock).toHaveReturnedTimes(2);
+    })
+
+    test("validator invalid in the second call", () => {
+        expect.assertions(4)
+
+        const validatorMock = jest.fn().mockReturnValueOnce(true).mockReturnValueOnce(false)
+
+        const attacker: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 1000,
+            defense: 350
+        }
+
+        const defender: Character = {
+            name: "Astrodev ghost",
+            life: 500,
+            strength: 100,
+            defense: 400
+        }
+        
+        try {
+            performAttack(attacker, defender, validatorMock)
+        } catch (error) {
+            expect(error.message).toEqual("Invalid character")
+            expect(validatorMock).toHaveBeenCalled();
+            expect(validatorMock).toHaveBeenCalledTimes(2);
+            expect(validatorMock).toHaveReturnedTimes(2);   
+        }
+    })
+
+    test("attacking 2 times", () => {
+        const validatorMock = jest.fn(()=> true)
+
+        const attacker: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: 350
+        }
+
+        const defender: Character = {
+            name: "Astrodev ghost",
+            life: 500,
+            strength: 100,
+            defense: 0
+        }
+
+        performAttack(attacker, defender, validatorMock)
+        performAttack(attacker, defender, validatorMock)
+
+        expect(defender.life).toEqual(100)
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(4);
+        expect(validatorMock).toHaveReturnedTimes(4);
+    })
+})
+```
+
+### Exercício 7
+```
+import {Character} from './Exercicio1'
+
+export const recoverCharacters = (characters: Character[], validator: (input: Character) => boolean): void => {
+    for(const character of characters){
+        if(!validator(character)){
+            throw new Error("Invalid character")
+        }
+    }
+
+    if(characters.length < 2){
+        throw new Error("You need to send at least 2 characters")
+    }
+
+    characters.forEach(character => {
+        character.life = 1500;
+    })
+}
+
+export const increaseCharacterAttack = (character: Character, newAttack: number, validator: (input: Character)=> boolean): void => {
+    if(!validator(character)){
+        throw new Error("Invalid character")
+    }
+
+    if(newAttack < character.strength){
+        throw new Error("Invalid new attack")
+    }
+    
+    character.strength = newAttack;
+}
+
+export const decreaseCharacterDefense = (character: Character, newDefense: number, validator: (input: Character)=> boolean): void => {
+    if(!validator(character)){
+        throw new Error("Invalid character")
+    }
+
+    if((newDefense > character.defense) && (newDefense >= 0)){
+        throw new Error("Invalid new defense")
+    }
+    character.defense = newDefense;
+}
+```
+
+### Exercício 8
+```
+import { Character } from "../src/Exercicio1"
+import { recoverCharacters, increaseCharacterAttack, decreaseCharacterDefense } from "../src/Exercicio7"
+
+describe("Recover characters tests", () => {
+    test("two valid characters", () =>{
+        const validatorMock = jest.fn(()=> true)
+
+        const characters: Character[] = [
+            {
+                name: "Astrodev",
+                life: 1000,
+                strength: 200,
+                defense: 350
+            },
+            {
+                name: "Astrodev ghost",
+                life: 500,
+                strength: 100,
+                defense: 400
+            }
+        ]
+        
+        recoverCharacters(characters, validatorMock);
+
+        for(const character of characters){
+            expect(character.life).toEqual(1500)
+        }
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(2);
+    })
+
+    test("test with character invalid", () =>{
+        const validatorMock = jest.fn(()=> false)
+
+        const characters: Character[] = [
+            {
+                name: "Astrodev",
+                life: 1000,
+                strength: 200,
+                defense: 350
+            },
+            {
+                name: "Astrodev ghost",
+                life: 500,
+                strength: -100,
+                defense: 400
+            }
+        ]
+
+        try {    
+            recoverCharacters(characters, validatorMock);
+        } catch (error) {
+            expect(error.message).toEqual("Invalid character")
+            expect(characters[0].life).toEqual(1000)
+            expect(characters[1].life).toEqual(500)
+            expect(validatorMock).toHaveBeenCalled();
+            expect(validatorMock).toHaveBeenCalledTimes(1);
+        }
+    })
+
+    test("trying to recover two times", () =>{
+        const validatorMock = jest.fn(()=> true)
+
+        const characters: Character[] = [
+            {
+                name: "Astrodev",
+                life: 1000,
+                strength: 200,
+                defense: 350
+            },
+            {
+                name: "Astrodev ghost",
+                life: 500,
+                strength: 100,
+                defense: 400
+            }
+        ]
+        
+        recoverCharacters(characters, validatorMock);
+        recoverCharacters(characters, validatorMock);
+
+        for(const character of characters){
+            expect(character.life).toEqual(1500)
+        }
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(4);
+    })
+
+    test("trying to heal 4 characters", () =>{
+        const validatorMock = jest.fn(()=> true)
+
+        const characters: Character[] = [
+            {
+                name: "Astrodev",
+                life: 1000,
+                strength: 200,
+                defense: 350
+            },
+            {
+                name: "Astrodev ghost",
+                life: 500,
+                strength: 100,
+                defense: 400
+            },
+            {
+                name: "Scorpion",
+                life: 1500,
+                strength: 700,
+                defense: 400
+            },
+            {
+                name: "Ryu",
+                life: 800,
+                strength: 500,
+                defense: 400
+            }
+        ]
+        
+        recoverCharacters(characters, validatorMock);
+
+        for(const character of characters){
+            expect(character.life).toEqual(1500)
+        }
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(4);
+    })
+})
+
+describe("Increase attack tests", () => {
+    test("valid character with valid newAttack", () =>{
+        const validatorMock = jest.fn(()=> true)
+    
+        const char: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: 350
+        }
+            
+            
+        increaseCharacterAttack(char, 300, validatorMock)
+    
+        expect(char.strength).toEqual(300)
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(1);
+    })
+
+    test("valid character with invalid newAttack", () =>{
+        expect.assertions(4);
+
+        const validatorMock = jest.fn(()=> true)
+    
+        const char: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: 350
+        }
+            
+        try {
+            increaseCharacterAttack(char, 100, validatorMock)
+        } catch (error) {
+            expect(char.strength).toEqual(200);
+            expect(error.message).toEqual("Invalid new attack");
+            expect(validatorMock).toHaveBeenCalled();
+            expect(validatorMock).toHaveBeenCalledTimes(1);
+        }
+    
+    })
+    test("invalid character with valid newAttack", () =>{
+        expect.assertions(4);
+
+        const validatorMock = jest.fn(()=>false)
+        
+        const char: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: -350
+        }
+
+        try {
+            increaseCharacterAttack(char, 300, validatorMock)
+        } catch (error) {
+            expect(char.strength).toEqual(200);
+            expect(error.message).toEqual("Invalid character");
+            expect(validatorMock).toHaveBeenCalled();
+            expect(validatorMock).toHaveBeenCalledTimes(1);
+        }
+    })
+
+    test("valid character with same newAttack", () =>{
+        const validatorMock = jest.fn(()=> true)
+    
+        const char: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: 350
+        }
+            
+            
+        increaseCharacterAttack(char, 200, validatorMock)
+    
+        expect(char.strength).toEqual(200)
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(1);
+    })
+})
+
+describe("Decrease defense tests", () => {
+    test("valid character with valid newDefense", () =>{
+        const validatorMock = jest.fn(()=> true)
+    
+        const char: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: 350
+        }
+            
+            
+        decreaseCharacterDefense(char, 300, validatorMock)
+    
+        expect(char.defense).toEqual(300)
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(1);
+    })
+
+    test("valid character with invalid newDefense", () =>{
+        expect.assertions(4);
+
+        const validatorMock = jest.fn(()=> true)
+    
+        const char: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: 350
+        }
+            
+        try {
+            decreaseCharacterDefense(char, 400, validatorMock)
+        } catch (error) {
+            expect(char.defense).toEqual(350);
+            expect(error.message).toEqual("Invalid new defense");
+            expect(validatorMock).toHaveBeenCalled();
+            expect(validatorMock).toHaveBeenCalledTimes(1);
+        }
+    
+    })
+    test("invalid character with valid newDefense", () =>{
+        expect.assertions(4);
+
+        const validatorMock = jest.fn(()=>false)
+        
+        const char: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: -200,
+            defense: 350
+        }
+
+        try {
+            decreaseCharacterDefense(char, 300, validatorMock)
+        } catch (error) {
+            expect(char.defense).toEqual(350);
+            expect(error.message).toEqual("Invalid character");
+            expect(validatorMock).toHaveBeenCalled();
+            expect(validatorMock).toHaveBeenCalledTimes(1);
+        }
+    })
+
+    test("valid character with same new defense", () =>{
+        const validatorMock = jest.fn(()=> true)
+    
+        const char: Character = {
+            name: "Astrodev",
+            life: 1000,
+            strength: 200,
+            defense: 350
+        }
+            
+            
+        increaseCharacterAttack(char, 350, validatorMock)
+    
+        expect(char.defense).toEqual(350)
+        expect(validatorMock).toHaveBeenCalled();
+        expect(validatorMock).toHaveBeenCalledTimes(1);
+    })
+})
+```
