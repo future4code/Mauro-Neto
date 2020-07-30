@@ -1,4 +1,4 @@
-import { UserSignupDTO } from "../model/User";
+import { UserSignupDTO, UserLoginDTO } from "../model/User";
 import { InvalidParameterError } from "../error/InvalidParameterError";
 import { UserDatabase } from "../data/UserDatabase";
 import { IdGenerator } from "../service/IdGenerator";
@@ -35,5 +35,23 @@ export class UserBusiness{
         const token = this.authenticator.generateToken({ id, role: input.role })
 
         return token;
+    }
+
+    public async login(input: UserLoginDTO): Promise<string>{
+        if(!input.email || !input.password){
+            throw new InvalidParameterError("Missing input")
+        }
+
+        const user = await this.userDatabase.getUserByEmail(input.email)
+
+        const isValidPassword = await this.hashManager.compare(input.password, user.getPassword())
+
+        if (!isValidPassword) {
+            throw new Error("Invalid credentials");
+        }
+
+        const token = this.authenticator.generateToken({ id: user.getId(), role: user.getRole()})
+
+        return token
     }
 }

@@ -1,4 +1,4 @@
-import {UserSignupDTO} from '../model/User'
+import {UserSignupDTO, UserLoginDTO} from '../model/User'
 import { Request, Response } from 'express';
 import { UserBusiness } from '../business/UserBusiness';
 import { BaseDatabase } from '../data/BaseDatabase';
@@ -20,6 +20,24 @@ export class UserController{
             }
 
             const token = await UserController.UserBusiness.signup(input)
+
+            res.status(200).send({token})
+
+        } catch (error) {
+            res.status(400).send({error: error.message})
+        }
+
+        await BaseDatabase.destroyConnnection();
+    }
+
+    public async login(req: Request, res: Response){
+        try {
+            const input: UserLoginDTO = {
+                email: req.body.email,
+                password: req.body.password
+            }
+            
+            const token = await UserController.UserBusiness.login(input)
 
             res.status(200).send({token})
 

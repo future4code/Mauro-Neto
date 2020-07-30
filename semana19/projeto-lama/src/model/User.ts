@@ -4,7 +4,7 @@ export class User{
         private name: string,
         private email: string,
         private password: string,
-        private role: string
+        private role: UserRole
     ){}
 
     public getId(){
@@ -23,6 +23,10 @@ export class User{
         return this.password
     }
 
+    public getRole(){
+        return this.role
+    }
+
     public static stringToRole(input: string): UserRole{
         switch(input.toUpperCase()){
             case "NORMAL":
@@ -33,6 +37,10 @@ export class User{
                 throw new Error("Invalid user role")
         }
     }
+
+    public static dataToUserModel(user: any): User{
+        return new User(user.id, user.name, user.email, user.password, User.stringToRole(user.role))
+    }
 }
 
 export interface UserSignupDTO{
@@ -40,6 +48,11 @@ export interface UserSignupDTO{
     email: string,
     password: string,
     role: string
+}
+
+export interface UserLoginDTO{
+    email: string,
+    password: string,
 }
 
 export enum UserRole{
