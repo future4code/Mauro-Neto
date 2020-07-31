@@ -35,7 +35,7 @@ export class BandBusiness{
     }
 
     public async viewBandDetails(token: string, term: string){
-        const userData = this.authenticator.getData(token)
+        this.authenticator.getData(token)
 
         const band = await this.bandDatabase.viewBandDetails(term);
 

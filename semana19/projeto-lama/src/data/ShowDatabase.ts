@@ -1,6 +1,5 @@
 import { BaseDatabase } from "./BaseDatabase";
 import { Show, ShowsByDayDto } from "../model/Show";
-import { showRouter } from "../routes/showRouter";
 
 export class ShowDatabase extends BaseDatabase{
     public async createShow(id: string, week_day: string, start_time: string, end_time: string, band_id: string){

@@ -12,7 +12,7 @@ export class ShowBusiness{
     ){}
 
     public async createShow(token: string, input: CreateShowDTO): Promise<void>{
-        const userData = this.authenticator.getData(token)
+        this.authenticator.getData(token)
 
         if(!input.week_day || !input.start_time || !input.end_time || !input.band_id){
             throw new InvalidParameterError("Missing input")
@@ -50,7 +50,7 @@ export class ShowBusiness{
     }
 
     public async getShowsByDay(token: string, week_day: string){
-        const userData = this.authenticator.getData(token)
+        this.authenticator.getData(token)
 
         if(!week_day || week_day.trim()===""){
             throw new InvalidParameterError("Missing input")
