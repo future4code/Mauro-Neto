@@ -13,8 +13,9 @@ export class UserDatabase extends BaseDatabase{
     public async getUserByEmail(email: string): Promise<User>{
         try {
             const user = await this.getConnection().select('*').from(process.env.USER_DB_NAME).where({email})
-            
-            return User.dataToUserModel(user[0])
+            if(user.length>0){
+                return User.dataToUserModel(user[0])
+            }
         } catch (error) {
             throw new Error(error.sqlMessage || error.message);
         }

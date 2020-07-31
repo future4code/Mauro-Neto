@@ -28,7 +28,7 @@ export class BandController{
 
     public async viewBandDetails(req: Request, res: Response){
         try {
-            const band = await BandController.BandBusiness.viewBandDetails(req.query.term as string)
+            const band = await BandController.BandBusiness.viewBandDetails(req.headers.authorization, req.query.term as string)
 
             res.status(200).send({band})
         } catch (error) {

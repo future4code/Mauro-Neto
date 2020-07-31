@@ -1,5 +1,5 @@
-import {UserSignupDTO, UserLoginDTO} from '../model/User'
 import { Request, Response } from 'express';
+import {UserSignupDTO, UserLoginDTO} from '../model/User'
 import { UserBusiness } from '../business/UserBusiness';
 import { BaseDatabase } from '../data/BaseDatabase';
 import { UserDatabase } from '../data/UserDatabase';

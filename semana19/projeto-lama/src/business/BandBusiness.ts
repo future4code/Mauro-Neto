@@ -15,6 +15,12 @@ export class BandBusiness{
     ){}
 
     public async registerBand(token: string, input: RegisterBandDTO){
+        const userData = this.authenticator.getData(token)
+
+        if(User.stringToRole(userData.role) !== UserRole.ADMIN){
+            throw new UnauthorizedError("You must be an admin to register a band")
+        }
+        
         if(!input.name || !input.music_genre || !input.responsible){
             throw new InvalidParameterError("Missing input")
         }
@@ -23,18 +29,14 @@ export class BandBusiness{
             throw new InvalidParameterError("You can't send parameters with blank characters")
         }
 
-        const userData = this.authenticator.getData(token)
-
-        if(User.stringToRole(userData.role) !== UserRole.ADMIN){
-            throw new UnauthorizedError("You must be an admin to register a band")
-        }
-
         const id = this.idGenerator.generate()
 
         await this.bandDatabase.registerBand(id, input.name, input.music_genre, input.responsible)
     }
 
-    public async viewBandDetails(term: string){
+    public async viewBandDetails(token: string, term: string){
+        const userData = this.authenticator.getData(token)
+
         const band = await this.bandDatabase.viewBandDetails(term);
 
         if(!band){

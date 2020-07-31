@@ -1,9 +1,10 @@
-import { UserSignupDTO, UserLoginDTO } from "../model/User";
+import { UserSignupDTO, UserLoginDTO, User } from "../model/User";
 import { InvalidParameterError } from "../error/InvalidParameterError";
 import { UserDatabase } from "../data/UserDatabase";
 import { IdGenerator } from "../service/IdGenerator";
 import { HashManager } from "../service/HashManager";
 import { Authenticator } from "../service/Authenticator";
+import { NotFoundError } from "../error/NotFoundError";
 
 export class UserBusiness{
     constructor(
@@ -26,6 +27,10 @@ export class UserBusiness{
             throw new InvalidParameterError("Invalid e-mail")
         }
 
+        if(input.role){
+            User.stringToRole(input.role)
+        }
+
         const id = this.idGenerator.generate()
 
         const hashedPassword = await this.hashManager.hash(input.password)
@@ -43,6 +48,10 @@ export class UserBusiness{
         }
 
         const user = await this.userDatabase.getUserByEmail(input.email)
+
+        if(!user){
+            throw new NotFoundError("User not found")
+        }
 
         const isValidPassword = await this.hashManager.compare(input.password, user.getPassword())
 
