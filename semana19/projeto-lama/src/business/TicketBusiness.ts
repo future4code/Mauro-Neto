@@ -4,7 +4,6 @@ import { Authenticator } from "../service/Authenticator";
 import { UserRole, User } from "../model/User";
 import { UnauthorizedError } from "../error/UnauthorizedError";
 import { TicketDatabase } from "../data/TicketDatabase";
-import { NotFoundError } from "../error/NotFoundError";
 
 export class TicketBusiness{
     constructor(

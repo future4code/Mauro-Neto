@@ -3,6 +3,7 @@ import { TicketBusiness } from "../business/TicketBusiness";
 import { createTicketDTO, buyTicketDTO } from '../model/Ticket';
 import { Authenticator } from '../service/Authenticator';
 import { TicketDatabase } from '../data/TicketDatabase';
+import { BaseDatabase } from '../data/BaseDatabase';
 
 export class TicketController{
     private static TicketBusiness = new TicketBusiness(new Authenticator, new TicketDatabase)
@@ -22,6 +23,7 @@ export class TicketController{
         } catch (error) {
             res.status(error.code || 400).send(error.message)
         }
+        await BaseDatabase.destroyConnnection();
     }
 
     public async buyTicket(req: Request, res: Response){
@@ -38,5 +40,6 @@ export class TicketController{
         } catch (error) {
             res.status(error.code || 400).send(error.message)
         }
+        await BaseDatabase.destroyConnnection();
     }
 }

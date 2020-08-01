@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { BandController } from '../controller/BandController';
+import {BandController} from '../controller/BandController';
 
 export const bandRouter = Router();
 

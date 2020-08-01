@@ -4,6 +4,7 @@ import { CreateShowDTO } from "../model/Show";
 import { ShowDatabase } from "../data/ShowDatabase";
 import { Authenticator } from "../service/Authenticator";
 import { IdGenerator } from "../service/IdGenerator";
+import { BaseDatabase } from "../data/BaseDatabase";
 
 export class ShowController{
     private static ShowBusiness = new ShowBusiness(new ShowDatabase, new Authenticator, new IdGenerator);
@@ -22,6 +23,7 @@ export class ShowController{
         } catch (error) {
             res.status(error.code || 400).send({error: error.message})
         }
+        await BaseDatabase.destroyConnnection();
     }
 
     public async getShowsByDay(req: Request, res: Response){
@@ -32,5 +34,6 @@ export class ShowController{
         } catch (error) {
             res.status(error.code || 400).send({error: error.message})
         }
+        await BaseDatabase.destroyConnnection();
     }
 }
