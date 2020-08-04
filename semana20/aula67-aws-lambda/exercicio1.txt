@@ -1,0 +1,31 @@
+1. a - Nada
+b - {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Missing input" })
+    };
+
+c - {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Missing input" })
+    };
+
+d - {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Missing email" })
+    };
+
+e - {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Invalid password" })
+    };
+
+f - {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: "User is correct"
+    })
+  };
+
+g - Devemos alterar o statusCode de 400 para 422 na verificação "if(!user.email)"
+
+h - Qualquer objeto que tenha como entrada um user, que tem um info, que tem name, email e password, como o exemplo da questão 1-f
