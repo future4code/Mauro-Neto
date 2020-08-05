@@ -1,5 +1,4 @@
 Fiz o código em ts, transpilei e mandei em um zip com os node_modules. Para testar, configurei as variáveis de ambiente na aws.
-(Não funcionou lá, tá meio bugado)
 Código transpilado:
 
 "use strict";
@@ -16,6 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.myFunc = void 0;
 const knex_1 = __importDefault(require("knex"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -37,17 +37,24 @@ const insertData = (name, cartoon_name, picture) => __awaiter(void 0, void 0, vo
         throw new Error(error.sqlMessage || error.message);
     }
 });
-const myFunc = (event) => {
-    if (event.name.trim() === "" || event.cartoon_name.trim() === "" || event.picture.trim() === "") {
+exports.myFunc = (event) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!event.name || !event.cartoon_name || !event.picture) {
         return {
             statusCode: 400,
             body: JSON.stringify("Missing parameters")
         };
     }
-    insertData(event.name, event.cartoon_name, event.picture);
+    if (event.name.trim() === "" || event.cartoon_name.trim() === "" || event.picture.trim() === "") {
+        return {
+            statusCode: 400,
+            body: JSON.stringify("blank parameters")
+        };
+    }
+    yield insertData(event.name, event.cartoon_name, event.picture);
+    yield connection.destroy();
     return {
         statusCode: 200,
         body: JSON.stringify("OK")
     };
-};
+});
 //# sourceMappingURL=index.js.map
