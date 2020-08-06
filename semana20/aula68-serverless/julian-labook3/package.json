@@ -17,7 +17,7 @@
     "knex": "^0.21.2",
     "moment": "^2.27.0",
     "mysql": "^2.18.1",
-    "serverless": "^1.78.1",
+    "serverless": "^1.74.1",
     "serverless-http": "^2.5.0",
     "uuid": "^8.2.0"
   },
