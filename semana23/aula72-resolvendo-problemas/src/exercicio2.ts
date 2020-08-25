@@ -13,11 +13,7 @@ const stringCompression = (str: string): string => {
         }
     }
 
-    if(arr.join('').length <= str.length){
-        return arr.join('')
-    }
-
-    return str;
+    return (arr.join('').length <= str.length) ? arr.join('') : str;
 }
 
 console.log(stringCompression("aabbb"))
